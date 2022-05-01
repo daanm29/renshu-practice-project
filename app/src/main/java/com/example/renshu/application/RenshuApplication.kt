@@ -1,9 +1,12 @@
 package com.example.renshu.application
 
-import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-@HiltAndroidApp
-class RenshuApplication : Application() {
-    
+class RenshuApplication : DaggerApplication() {
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerRenshuApplicationComponent.factory().create(this)
+    }
+
 }
