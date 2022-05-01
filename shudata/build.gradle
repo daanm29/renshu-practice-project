@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -34,6 +35,10 @@ android {
 
 dependencies {
     implementation project(':shudomain')
+
+    // Dagger-Hilt
+    implementation "com.google.dagger:hilt-android:$dagger_version"
+    kapt "com.google.dagger:hilt-compiler:$dagger_version"
 
     // Testing
     testImplementation "junit:junit:$junit_version"
