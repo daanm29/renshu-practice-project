@@ -1,0 +1,25 @@
+/* TODO: Figure out what this stuff does (Line 2 - 16) */
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+/* Project name */
+rootProject.name = "Renshu"
+
+/* Modules used within the project */
+include ':app'
+include ':shupresentation'
+include ':shudomain'
+include ':shudata'

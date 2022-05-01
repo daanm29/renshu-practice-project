@@ -1,0 +1,21 @@
+plugins {
+    id 'kotlin'
+    id 'kotlin-kapt'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+compileKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+
+    // Testing
+    testImplementation "junit:junit:$junit_version"
+}
