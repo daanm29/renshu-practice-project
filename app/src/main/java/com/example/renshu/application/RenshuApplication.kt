@@ -1,5 +1,6 @@
 package com.example.renshu.application
 
+import com.example.renshu.application.di.DaggerRenshuApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 

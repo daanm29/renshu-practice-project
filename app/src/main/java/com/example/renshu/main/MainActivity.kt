@@ -1,19 +1,24 @@
 package com.example.renshu.main
 
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.renshu.R
 import com.example.renshu.databinding.ActivityMainBinding
 import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity(R.layout.activity_main) {
 
-    private val binding: ActivityMainBinding by viewBinding()
+    private val ui by viewBinding<ActivityMainBinding>()
+
+    private val navController: NavController by lazy {
+        findNavController(R.id.fragmentContainerView)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
-        val textView = binding.randomText
-        textView.text = "Hello World 2.0!"
+        NavigationUI.setupWithNavController(ui.bottomNavigationView, navController)
     }
 }
