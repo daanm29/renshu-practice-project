@@ -4,6 +4,7 @@ import android.app.Activity
 import com.example.renshu.home.HomeFragmentModule
 import com.example.renshu.practice.PracticeFragmentModule
 import com.example.renshu.settings.SettingsFragmentModule
+import com.example.renshu.settings.info.AppInfoFragmentModule
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -17,6 +18,7 @@ interface MainActivityModule {
             HomeFragmentModule::class,
             PracticeFragmentModule::class,
             SettingsFragmentModule::class,
+            AppInfoFragmentModule::class,
         ]
     )
     fun bindMainActivity(): MainActivity

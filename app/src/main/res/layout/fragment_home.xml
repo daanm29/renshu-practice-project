@@ -13,11 +13,9 @@
             android:fitsSystemWindows="true">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
+                style="@style/CustomCollapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="4dp"
-                app:collapsedTitleTextColor="@color/white"
-                app:expandedTitleTextColor="@color/white"
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
                 app:title="Home">
 
@@ -43,16 +41,43 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:paddingTop="12dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingTop="12dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/testOne"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hello World!"
+                    android:layout_marginHorizontal="14dp"
+                    android:layout_marginTop="14dp"
+                    app:cardCornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/red"
+                    app:strokeWidth="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.example.renshu.generic.StreakLayout
+                            android:id="@+id/streakLayout"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:bestStreak="0"
+                            app:currentStreak="0"
+                            app:lastStudied="0" />
+
+                        <CalendarView
+                            android:id="@+id/calendarView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

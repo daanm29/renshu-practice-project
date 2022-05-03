@@ -16,6 +16,13 @@ compileTestKotlin {
 
 dependencies {
 
+    // Inject
+    implementation "javax.inject:javax.inject:1"
+
+    // Rx
+    implementation "io.reactivex.rxjava3:rxjava:$rx_java_version"
+    implementation "io.reactivex.rxjava3:rxkotlin:$rx_kotlin_version"
+
     // Testing
     testImplementation "junit:junit:$junit_version"
 }

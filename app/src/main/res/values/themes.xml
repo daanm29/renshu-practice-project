@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.Renshu" parent="Theme.MaterialComponents.Light.NoActionBar">
 
+    <!-- Main Theme -->
+    <style name="Theme.Renshu" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/red</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimaryContainer">@color/pink_70</item>
@@ -36,13 +37,37 @@
 
         <item name="android:shadowColor">@color/black</item>
         <item name="colorPrimaryInverse">@color/pink</item>
+
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
     </style>
 
-    <style name="TextButton">
-        <item name="android:padding">16dp</item>
+    <!-- Button -->
+    <style name="CustomSelectableItemBackground">
+        <item name="colorControlHighlight">@color/red</item>
+    </style>
+
+    <style name="CustomTextButton">
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
+        <item name="android:theme">@style/CustomSelectableItemBackground</item>
         <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <!-- CollapsingToolbar -->
+    <style name="CustomCollapsingToolbar">
+        <item name="android:elevation">4dp</item>
+        <item name="collapsedTitleTextAppearance">@style/TextAppearance</item>
+        <item name="collapsedTitleTextColor">@color/white</item>
+        <item name="expandedTitleTextAppearance">@style/TextAppearance</item>
+        <item name="expandedTitleTextColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Toolbar -->
+    <style name="CustomToolbar">
+        <item name="android:textColorSecondary">@color/white</item>
     </style>
 </resources>

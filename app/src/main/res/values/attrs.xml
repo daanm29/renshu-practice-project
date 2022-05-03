@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TextButton">
+        <attr name="buttonTitle" format="string"/>
+        <attr name="buttonImage" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="StreakLayout">
+        <attr name="currentStreak" format="string" />
+        <attr name="bestStreak" format="string" />
+        <attr name="lastStudied" format="string" />
+    </declare-styleable>
+</resources>

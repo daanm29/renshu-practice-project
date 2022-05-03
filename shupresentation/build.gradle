@@ -36,6 +36,19 @@ android {
 dependencies {
     implementation project(':shudomain')
 
+    // Inject
+    implementation "javax.inject:javax.inject:1"
+
+    // Rx
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
+    implementation "io.reactivex.rxjava3:rxjava:$rx_java_version"
+    implementation "io.reactivex.rxjava3:rxkotlin:$rx_kotlin_version"
+
+    // Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
+
     // Testing
     testImplementation "junit:junit:$junit_version"
 }
