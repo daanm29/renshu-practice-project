@@ -10,4 +10,8 @@
         <attr name="bestStreak" format="string" />
         <attr name="lastStudied" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="DualStudyProgressBar">
+        <attr name="enableTotalStreak" format="boolean" />
+    </declare-styleable>
 </resources>

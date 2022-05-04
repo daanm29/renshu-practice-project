@@ -1,4 +1,4 @@
-package com.example.renshu.generic
+package com.example.renshu.generic.view
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.core.view.isVisible
 import com.example.renshu.R
 
-class StudyProgressBar @JvmOverloads constructor(
+class DualStudyProgressBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -38,9 +40,18 @@ class StudyProgressBar @JvmOverloads constructor(
     var onButtonClicked: (() -> Unit)? = null
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.custom_study_progress_bar, this)
+        LayoutInflater.from(context).inflate(R.layout.custom_dual_study_progress_bar, this)
+        val attributes = context.obtainStyledAttributes(attrs, R.styleable.DualStudyProgressBar)
 
         val studyContinueButton: Button = findViewById(R.id.continueButton)
         studyContinueButton.setOnClickListener { onButtonClicked?.invoke() }
+
+        val totalTextView: TextView = findViewById(R.id.totalProgressTitle)
+        totalTextView.isVisible = attributes.getBoolean(R.styleable.DualStudyProgressBar_enableTotalStreak, true)
+
+        val totalProgressBar: ProgressBar = findViewById(R.id.studyTotalBar)
+        totalProgressBar.isVisible = attributes.getBoolean(R.styleable.DualStudyProgressBar_enableTotalStreak, true)
+
+        attributes.recycle()
     }
 }

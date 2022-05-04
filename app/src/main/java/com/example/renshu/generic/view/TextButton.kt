@@ -1,4 +1,4 @@
-package com.example.renshu.generic
+package com.example.renshu.generic.view
 
 import android.annotation.SuppressLint
 import android.content.Context

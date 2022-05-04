@@ -31,4 +31,7 @@
 
     <!-- White -->
     <color name="white">#FFFFFF</color>
+
+    <!-- Imperial Gold -->
+    <color name="imperial_gold">#DDA700</color>
 </resources>

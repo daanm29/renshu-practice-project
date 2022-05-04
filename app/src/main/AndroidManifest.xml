@@ -23,9 +23,15 @@
         </activity>
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
-            android:theme="@style/CustomOssLicensesMenu"
             android:exported="true"
             android:screenOrientation="portrait"
+            android:theme="@style/CustomOssLicensesMenu"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomOssLicensesMenu"
             tools:ignore="LockedOrientationActivity" />
     </application>
 </manifest>

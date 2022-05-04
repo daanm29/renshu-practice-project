@@ -7,9 +7,14 @@ import androidx.navigation.ui.NavigationUI
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.renshu.R
 import com.example.renshu.databinding.ActivityMainBinding
+import com.example.renshu.generic.BottomNavigationManager
 import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity(R.layout.activity_main) {
+
+    @Inject
+    lateinit var bottomNavigationManager: BottomNavigationManager
 
     private val ui by viewBinding<ActivityMainBinding>()
 
@@ -20,7 +25,11 @@ class MainActivity : DaggerAppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        NavigationUI.setupWithNavController(ui.bottomNavigationView, navController)
+        initNavigation()
+    }
 
+    private fun initNavigation() {
+        NavigationUI.setupWithNavController(ui.bottomNavigationView, navController)
+        bottomNavigationManager.initialize()
     }
 }

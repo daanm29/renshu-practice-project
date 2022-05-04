@@ -18,4 +18,8 @@
     <string name="study_progress_total">Total Progress</string>
     <string name="study_progress_current">Current Progress</string>
     <string name="study_progress_button">Continue</string>
+    <string name="home_streak_title">Streak:</string>
+    <string name="home_list_progress_title">List Progress:</string>
+    <string name="home_hiragana_progress_title">ひらがな Progress:</string>
+    <string name="home_katakana_progress_title">カタカナ Progress:</string>
 </resources>
