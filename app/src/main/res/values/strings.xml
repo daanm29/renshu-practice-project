@@ -15,4 +15,7 @@
     <string name="streak_current">Current Streak:</string>
     <string name="streak_best">Best Streak:</string>
     <string name="streak_studied">Last Studied:</string>
+    <string name="study_progress_total">Total Progress</string>
+    <string name="study_progress_current">Current Progress</string>
+    <string name="study_progress_button">Continue</string>
 </resources>

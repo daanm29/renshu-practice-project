@@ -19,6 +19,8 @@ class MainActivity : DaggerAppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         NavigationUI.setupWithNavController(ui.bottomNavigationView, navController)
+
     }
 }
