@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -51,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="14dp"
                     android:layout_marginTop="14dp"
-                    android:text="ひらがな："
+                    android:text="@string/practice_title_hiragana"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -60,20 +61,42 @@
 
                 <!-- TODO: ADD RECYCLERVIEW WITH THE HIRAGANA AND KATAKANA -->
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/hiraganaRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hiraganaTitle"
+                    tools:itemCount="2" />
+
                 <TextView
                     android:id="@+id/katakanaTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="14dp"
                     android:layout_marginTop="14dp"
-                    android:text="カタカナ："
+                    android:text="@string/practice_title_katakana"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hiraganaTitle" />
+                    app:layout_constraintTop_toBottomOf="@id/hiraganaRecyclerView" />
 
                 <!-- TODO: ADD RECYCLERVIEW WITH THE HIRAGANA AND KATAKANA -->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/katakanaRecyclerView"
+                    android:layout_width="match_parent"
+                    android:overScrollMode="never"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/katakanaTitle"
+                    tools:itemCount="2" />
 
                 <TextView
                     android:id="@+id/wordListTitle"
@@ -81,14 +104,25 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="14dp"
                     android:layout_marginTop="14dp"
-                    android:text="Hello World!"
+                    android:text="@string/practice_title_list"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/katakanaTitle" />
+                    app:layout_constraintTop_toBottomOf="@id/katakanaRecyclerView" />
 
                 <!-- TODO: ADD RECYCLERVIEW WITH LISTS AND ADD BUTTON TO ADD LISTS-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/wordListRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/wordListTitle"
+                    tools:itemCount="2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

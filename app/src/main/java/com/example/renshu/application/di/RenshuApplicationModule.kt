@@ -3,13 +3,14 @@ package com.example.renshu.application.di
 import android.app.Application
 import android.content.Context
 import com.example.renshu.application.RenshuApplication
+import com.example.shudata.di.RenshuDataModule
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
 @Module(
     includes = [
-        /* TODO: Add Layer Modules */
+        RenshuDataModule::class
     ]
 )
 interface RenshuApplicationModule {

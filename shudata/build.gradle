@@ -16,6 +16,11 @@ android {
     }
 
     buildTypes {
+        all {
+            buildConfigField "String", "JAP_API_KEY", "\"57cb5120a2msh9383b9d43682514p1eafa5jsn8309a85fd929\""
+            buildConfigField "String", "JAP_API_URL", "\"https://japanese-alphabet.p.rapidapi.com/api/all\""
+            buildConfigField "String", "JAP_HOST_URL", "\"japanese-alphabet.p.rapidapi.com\""
+        }
         debug {
             minifyEnabled false
         }
@@ -50,6 +55,21 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+
+    // Okhttp
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+
+    // Room
+    implementation 'androidx.room:room-runtime:2.4.2'
+    implementation "androidx.room:room-rxjava3:2.4.2"
+    implementation 'androidx.room:room-ktx:2.4.2'
+    kapt 'androidx.room:room-compiler:2.4.2'
 
     // Testing
     testImplementation "junit:junit:$junit_version"

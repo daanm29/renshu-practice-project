@@ -22,4 +22,7 @@
     <string name="home_list_progress_title">List Progress:</string>
     <string name="home_hiragana_progress_title">ひらがな Progress:</string>
     <string name="home_katakana_progress_title">カタカナ Progress:</string>
+    <string name="practice_title_katakana">カタカナ：</string>
+    <string name="practice_title_hiragana">ひらがな：</string>
+    <string name="practice_title_list">Lists:</string>
 </resources>
