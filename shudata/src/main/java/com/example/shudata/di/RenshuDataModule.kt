@@ -1,15 +1,10 @@
 package com.example.shudata.di
 
-import android.content.Context
 import com.example.shudata.BuildConfig
-import com.example.shudata.database.RenshuDatabase
-import com.example.shudata.database.dao.KanaDao
 import com.example.shudata.di.RenshuDataModule.Bindings
 import com.example.shudata.kana.data.KanaService
-import com.example.shudata.kana.data.LocalGetKanaRepository
 import com.example.shudata.kana.data.RemoteGetKanaRepository
 import com.example.shudomain.practice.repository.GetKanaRepository
-import com.example.shudomain.practice.repository.GetLocalKanaRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Binds
@@ -53,22 +48,11 @@ class RenshuDataModule {
             .create(KanaService::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun provideDatabase(context: Context): RenshuDatabase {
-        return RenshuDatabase.getInstance(context)
-    }
-
-    @Provides
-    fun provideKanaDao(database: RenshuDatabase): KanaDao = database.kanaDao()
-
     @Module
     interface Bindings {
 
         @Binds
         fun bindKanaRepository(repository: RemoteGetKanaRepository): GetKanaRepository
 
-        @Binds
-        fun bindLocalKanaRepository(repository: LocalGetKanaRepository): GetLocalKanaRepository
     }
 }

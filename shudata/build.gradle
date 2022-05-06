@@ -18,7 +18,7 @@ android {
     buildTypes {
         all {
             buildConfigField "String", "JAP_API_KEY", "\"57cb5120a2msh9383b9d43682514p1eafa5jsn8309a85fd929\""
-            buildConfigField "String", "JAP_API_URL", "\"https://japanese-alphabet.p.rapidapi.com/api/all\""
+            buildConfigField "String", "JAP_API_URL", "\"https://japanese-alphabet.p.rapidapi.com/api/\""
             buildConfigField "String", "JAP_HOST_URL", "\"japanese-alphabet.p.rapidapi.com\""
         }
         debug {
@@ -70,6 +70,9 @@ dependencies {
     implementation "androidx.room:room-rxjava3:2.4.2"
     implementation 'androidx.room:room-ktx:2.4.2'
     kapt 'androidx.room:room-compiler:2.4.2'
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
 
     // Testing
     testImplementation "junit:junit:$junit_version"

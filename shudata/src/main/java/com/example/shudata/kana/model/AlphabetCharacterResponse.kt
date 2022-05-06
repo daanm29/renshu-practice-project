@@ -2,7 +2,7 @@ package com.example.shudata.kana.model
 
 import com.google.gson.annotations.SerializedName
 
-data class AlphabetPortionDataResponse(
+data class AlphabetCharacterResponse(
 
     @SerializedName(value = "japanese")
     val japaneseCharacter: String,
@@ -11,5 +11,5 @@ data class AlphabetPortionDataResponse(
     val romajiCharacter: String,
 
     @SerializedName(value = "examples")
-    val portionDataExamples: List<JapaneseExampleResponse>
+    val portionDataExamples: List<AlphabetCharacterExampleResponse>
 )

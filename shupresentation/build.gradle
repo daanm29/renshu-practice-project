@@ -52,6 +52,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
 
+    // Timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
     // Testing
     testImplementation "junit:junit:$junit_version"
 }

@@ -8,5 +8,5 @@ data class AlphabetPortionResponse(
     val contentName: String,
 
     @SerializedName(value = "content")
-    val contentData: List<AlphabetPortionDataResponse>
+    val contentData: List<AlphabetCharacterResponse>
 )

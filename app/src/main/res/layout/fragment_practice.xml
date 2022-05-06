@@ -59,18 +59,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- TODO: ADD RECYCLERVIEW WITH THE HIRAGANA AND KATAKANA -->
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/hiraganaRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:overScrollMode="never"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hiraganaTitle"
-                    tools:itemCount="2" />
+                    tools:itemCount="10"
+                    tools:listitem="@layout/item_alphabet_character" />
 
                 <TextView
                     android:id="@+id/katakanaTitle"
@@ -85,18 +83,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hiraganaRecyclerView" />
 
-                <!-- TODO: ADD RECYCLERVIEW WITH THE HIRAGANA AND KATAKANA -->
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/katakanaRecyclerView"
                     android:layout_width="match_parent"
-                    android:overScrollMode="never"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/katakanaTitle"
-                    tools:itemCount="2" />
+                    tools:itemCount="10"
+                    tools:listitem="@layout/item_alphabet_character" />
 
                 <TextView
                     android:id="@+id/wordListTitle"
@@ -117,8 +113,8 @@
                     android:id="@+id/wordListRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:overScrollMode="never"
                     android:orientation="horizontal"
+                    android:overScrollMode="never"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/wordListTitle"
