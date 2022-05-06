@@ -7,7 +7,7 @@
         android:id="@+id/japaneseCard"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginHorizontal="16dp"
+        android:layout_marginHorizontal="8dp"
         app:cardCornerRadius="20dp"
         app:strokeColor="@color/red"
         app:strokeWidth="3dp">
