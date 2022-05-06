@@ -10,9 +10,6 @@ class GetAllKatakana @Inject constructor(
 ) {
 
     operator fun invoke(): Single<List<AlphabetCharacter>> {
-        return kanaRepository.getAllKatakana().map { alphabetPortions ->
-            val katakanaDataset = alphabetPortions[0].portionData + alphabetPortions[1].portionData
-            katakanaDataset
-        }
+        return kanaRepository.getAllKatakana()
     }
 }

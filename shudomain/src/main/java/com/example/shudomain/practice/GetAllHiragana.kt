@@ -10,9 +10,6 @@ class GetAllHiragana @Inject constructor(
 ) {
 
     operator fun invoke(): Single<List<AlphabetCharacter>> {
-        return kanaRepository.getAllHiragana().map { alphabetPortions ->
-            val hiraganaDataset = alphabetPortions[0].portionData + alphabetPortions[1].portionData
-            hiraganaDataset
-        }
+        return kanaRepository.getAllHiragana()
     }
 }

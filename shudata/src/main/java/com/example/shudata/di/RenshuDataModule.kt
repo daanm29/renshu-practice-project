@@ -1,6 +1,10 @@
 package com.example.shudata.di
 
+import android.content.Context
 import com.example.shudata.BuildConfig
+import com.example.shudata.database.RenshuDatabase
+import com.example.shudata.database.dao.HiraganaDao
+import com.example.shudata.database.dao.KatakanaDao
 import com.example.shudata.di.RenshuDataModule.Bindings
 import com.example.shudata.kana.data.KanaService
 import com.example.shudata.kana.data.RemoteGetKanaRepository
@@ -47,6 +51,18 @@ class RenshuDataModule {
             .build()
             .create(KanaService::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideDatabase(context: Context): RenshuDatabase {
+        return RenshuDatabase.getInstance(context)
+    }
+
+    @Provides
+    fun provideHiraganaDao(database: RenshuDatabase): HiraganaDao = database.hiraganaDao()
+
+    @Provides
+    fun provideKatakanaDao(database: RenshuDatabase): KatakanaDao = database.katakanaDao()
 
     @Module
     interface Bindings {

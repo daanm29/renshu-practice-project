@@ -1,0 +1,36 @@
+package com.example.shudata.database
+
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.shudata.database.dao.HiraganaDao
+import com.example.shudata.database.dao.KatakanaDao
+import com.example.shudata.database.entity.HiraganaEntity
+import com.example.shudata.database.entity.KatakanaEntity
+
+@Database(
+    entities = [
+        HiraganaEntity::class,
+        KatakanaEntity::class,
+    ],
+    version = 1,
+    exportSchema = false
+)
+abstract class RenshuDatabase : RoomDatabase() {
+
+    abstract fun hiraganaDao(): HiraganaDao
+
+    abstract fun katakanaDao(): KatakanaDao
+
+    companion object {
+
+        private const val DATABASE_NAME = "RENSHU_DATABASE"
+
+        fun getInstance(context: Context): RenshuDatabase {
+            return Room.databaseBuilder(context, RenshuDatabase::class.java, DATABASE_NAME)
+                .allowMainThreadQueries()
+                .build()
+        }
+    }
+}
