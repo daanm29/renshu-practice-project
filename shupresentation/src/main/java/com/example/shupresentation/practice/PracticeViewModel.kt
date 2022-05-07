@@ -65,8 +65,16 @@ class PracticeViewModel @Inject constructor(
         _navigation.postValue(OpenHiragana(character))
     }
 
+    fun openHiraganaPractice() {
+        _navigation.postValue(OpenHiraganaPractice)
+    }
+
     fun openKatakana(character: String) {
         _navigation.postValue(OpenKatakana(character))
+    }
+
+    fun openKatakanaPractice() {
+        _navigation.postValue(OpenKatakanaPractice)
     }
 
     fun openWordList(listId: String) {

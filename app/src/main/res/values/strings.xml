@@ -25,4 +25,7 @@
     <string name="practice_title_katakana">カタカナ：</string>
     <string name="practice_title_hiragana">ひらがな：</string>
     <string name="practice_title_list">Lists:</string>
+    <string name="practice_hiragana_button">Practice ひらがな</string>
+    <string name="practice_katakana_button">Practice　カタカナ</string>
+    <string name="practice_toolbar_title">Practice</string>
 </resources>

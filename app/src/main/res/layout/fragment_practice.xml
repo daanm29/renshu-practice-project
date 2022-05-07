@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-                app:title="Practice">
+                app:title="@string/practice_toolbar_title">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                             android:layout_marginHorizontal="16dp"
                             android:layout_marginTop="14dp"
                             android:layout_marginBottom="14dp"
-                            android:text="Practice ひらがな"
+                            android:text="@string/practice_hiragana_button"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hiraganaRecyclerView" />
@@ -148,7 +148,7 @@
                             android:layout_marginHorizontal="16dp"
                             android:layout_marginTop="14dp"
                             android:layout_marginBottom="14dp"
-                            android:text="Practice　カタカナ" />
+                            android:text="@string/practice_katakana_button" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 

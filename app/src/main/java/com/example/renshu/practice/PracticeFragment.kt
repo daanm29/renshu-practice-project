@@ -1,7 +1,6 @@
 package com.example.renshu.practice
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -27,12 +26,13 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
     private val ui by viewBinding<FragmentPracticeBinding>()
 
     private var hiraganaItemAdapter = SinglePracticeItemAdapter { character -> viewModel.openHiragana(character) }
-    private var katakanaItemAdapter = SinglePracticeItemAdapter { character -> viewModel.openKatakana(character)}
+    private var katakanaItemAdapter = SinglePracticeItemAdapter { character -> viewModel.openKatakana(character) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         observeViewModel()
+        initButtons()
     }
 
     private fun observeViewModel() {
@@ -47,6 +47,8 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
             is PracticeNavigationAction.OpenHiragana -> {}
             is PracticeNavigationAction.OpenKatakana -> {}
             is PracticeNavigationAction.OpenList -> {}
+            PracticeNavigationAction.OpenHiraganaPractice -> {}
+            PracticeNavigationAction.OpenKatakanaPractice -> {}
         }
     }
 
@@ -76,5 +78,15 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
         }
 
         katakanaItemAdapter.submitList(characters)
+    }
+
+    private fun initButtons() {
+        ui.hiraganaPracticeButton.setOnClickListener {
+            viewModel.openHiraganaPractice()
+        }
+
+        ui.katakanaPracticeButton.setOnClickListener {
+            viewModel.openKatakanaPractice()
+        }
     }
 }

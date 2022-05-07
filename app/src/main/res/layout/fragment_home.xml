@@ -23,8 +23,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="104dp"
                     android:contentDescription="@null"
-                    android:src="@drawable/image_japanese_emperor_flag"
                     android:scaleType="fitCenter"
+                    android:src="@drawable/image_japanese_emperor_flag"
                     app:layout_collapseMode="parallax" />
 
                 <androidx.appcompat.widget.Toolbar
@@ -195,7 +195,8 @@
                         android:id="@+id/katakanaProgressBar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="14dp" />
+                        android:layout_margin="14dp"
+                        app:enableTotalStreak="false" />
                 </com.google.android.material.card.MaterialCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
