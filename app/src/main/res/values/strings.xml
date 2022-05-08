@@ -28,4 +28,13 @@
     <string name="practice_hiragana_button">Practice ひらがな</string>
     <string name="practice_katakana_button">Practice　カタカナ</string>
     <string name="practice_toolbar_title">Practice</string>
+    <string name="alphabet_title">%1$s: %2$s</string>
+    <string name="alphabet_hiragana">Hiragana</string>
+    <string name="alphabet_katakana">Katakana</string>
+    <string name="alphabet_character_display">%s</string>
+    <string name="alphabet_romaji"><b>ローマ字:</b></string>
+    <string name="alphabet_character_example"><b>Example: </b></string>
+    <string name="alphabet_example_japanese"><b>日本語:</b></string>
+    <string name="alphabet_example_meaning"><b>意味:</b></string>
+    <string name="alphabet_example_romaji"><b>ローマ字:</b></string>
 </resources>

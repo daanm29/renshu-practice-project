@@ -14,7 +14,15 @@
         android:id="@+id/fragment_practice"
         android:name="com.example.renshu.practice.PracticeFragment"
         android:label="PracticeFragment"
-        tools:layout="@layout/fragment_practice" />
+        tools:layout="@layout/fragment_practice">
+        <action
+            android:id="@+id/action_practiceFragment_toAlphabetFragment"
+            app:destination="@id/fragment_alphabet"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_settings"
         android:name="com.example.renshu.settings.SettingsFragment"
@@ -33,4 +41,36 @@
         android:name="com.example.renshu.settings.info.AppInfoFragment"
         android:label="AppInfoFragment"
         tools:layout="@layout/fragment_app_info" />
+    <fragment
+        android:id="@+id/fragment_alphabet"
+        android:name="com.example.renshu.practice.alphabet.AlphabetFragment"
+        android:label="AlphabetFragment"
+        tools:layout="@layout/fragment_alphabet">
+        <argument
+            android:name="alphabet"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="character"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="position"
+            android:defaultValue="-1L"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_fragment_alphabet_self"
+            app:destination="@id/fragment_alphabet"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_alphabetFragment_toPracticeFragment"
+            app:destination="@id/fragment_practice"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
 </navigation>

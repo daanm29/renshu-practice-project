@@ -18,6 +18,7 @@ class BottomNavigationManager @Inject constructor(private val mainActivity: Main
 
     private val withoutBottomBar: Set<Int> = setOf(
         R.id.fragment_app_info,
+        R.id.fragment_alphabet,
     )
 
     fun initialize(onBottomBarShown: ((Boolean) -> Unit)? = null) {

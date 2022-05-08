@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -44,12 +45,30 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
 
     private fun handleNavigationAction(action: PracticeNavigationAction) {
         when (action) {
-            is PracticeNavigationAction.OpenHiragana -> {}
-            is PracticeNavigationAction.OpenKatakana -> {}
+            is PracticeNavigationAction.OpenHiragana -> openHiraganaCharacter(action.character)
+            is PracticeNavigationAction.OpenKatakana -> openKatakanaCharacter(action.character)
             is PracticeNavigationAction.OpenList -> {}
             PracticeNavigationAction.OpenHiraganaPractice -> {}
             PracticeNavigationAction.OpenKatakanaPractice -> {}
         }
+    }
+
+    private fun openHiraganaCharacter(character: String) {
+        findNavController().navigate(
+            PracticeFragmentDirections
+                .actionPracticeFragmentToAlphabetFragment()
+                .setCharacter(character)
+                .setAlphabet(getString(R.string.alphabet_hiragana))
+        )
+    }
+
+    private fun openKatakanaCharacter(character: String) {
+        findNavController().navigate(
+            PracticeFragmentDirections
+                .actionPracticeFragmentToAlphabetFragment()
+                .setCharacter(character)
+                .setAlphabet(getString(R.string.alphabet_katakana))
+        )
     }
 
     private fun handleUIState(state: UIState) {
