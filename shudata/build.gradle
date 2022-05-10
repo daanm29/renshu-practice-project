@@ -17,7 +17,11 @@ android {
 
     buildTypes {
         all {
-            buildConfigField "String", "JAP_API_KEY", "\"57cb5120a2msh9383b9d43682514p1eafa5jsn8309a85fd929\""
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file("local.properties").newDataInputStream())
+            def japaneseApiKey = properties.getProperty("apiKey")
+
+            buildConfigField "String", "JAP_API_KEY", japaneseApiKey
             buildConfigField "String", "JAP_API_URL", "\"https://japanese-alphabet.p.rapidapi.com/api/\""
             buildConfigField "String", "JAP_HOST_URL", "\"japanese-alphabet.p.rapidapi.com\""
         }
