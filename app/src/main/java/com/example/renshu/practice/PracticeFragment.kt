@@ -48,8 +48,8 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
             is PracticeNavigationAction.OpenHiragana -> openHiraganaCharacter(action.character)
             is PracticeNavigationAction.OpenKatakana -> openKatakanaCharacter(action.character)
             is PracticeNavigationAction.OpenList -> {}
-            PracticeNavigationAction.OpenHiraganaPractice -> {}
-            PracticeNavigationAction.OpenKatakanaPractice -> {}
+            is PracticeNavigationAction.OpenHiraganaPractice -> { openKanaExercise(action.alphabet) }
+            is PracticeNavigationAction.OpenKatakanaPractice -> { openKanaExercise(action.alphabet) }
         }
     }
 
@@ -59,6 +59,14 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
                 .actionPracticeFragmentToAlphabetFragment()
                 .setCharacter(character)
                 .setAlphabet(getString(R.string.alphabet_hiragana))
+        )
+    }
+    
+    private fun openKanaExercise(alphabet: String) {
+        findNavController().navigate(
+            PracticeFragmentDirections
+                .actionFragmentPracticeToFragmentKanaExercise()
+                .setAlphabet(alphabet)
         )
     }
 
@@ -101,11 +109,11 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
 
     private fun initButtons() {
         ui.hiraganaPracticeButton.setOnClickListener {
-            viewModel.openHiraganaPractice()
+            viewModel.openHiraganaPractice(requireContext().getString(R.string.alphabet_hiragana).lowercase())
         }
 
         ui.katakanaPracticeButton.setOnClickListener {
-            viewModel.openKatakanaPractice()
+            viewModel.openKatakanaPractice(requireContext().getString(R.string.alphabet_katakana).lowercase())
         }
     }
 }

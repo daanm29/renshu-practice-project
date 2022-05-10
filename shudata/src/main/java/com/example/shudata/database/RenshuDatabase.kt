@@ -7,12 +7,16 @@ import androidx.room.RoomDatabase
 import com.example.shudata.database.dao.HiraganaDao
 import com.example.shudata.database.dao.KatakanaDao
 import com.example.shudata.database.entity.HiraganaEntity
+import com.example.shudata.database.entity.HiraganaProgressEntity
 import com.example.shudata.database.entity.KatakanaEntity
+import com.example.shudata.database.entity.KatakanaProgressEntity
 
 @Database(
     entities = [
         HiraganaEntity::class,
+        HiraganaProgressEntity::class,
         KatakanaEntity::class,
+        KatakanaProgressEntity::class,
     ],
     version = 1,
     exportSchema = false

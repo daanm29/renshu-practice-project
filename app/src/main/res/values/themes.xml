@@ -73,6 +73,11 @@
         <item name="android:progressTint">@color/red</item>
     </style>
 
+    <style name="CustomExerciseProgress" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:scaleY">2.5</item>
+        <item name="android:progressTint">@color/red</item>
+    </style>
+
     <!-- OssLicensesMenu -->
     <style name="CustomOssLicensesMenu" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/red</item>

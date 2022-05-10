@@ -7,7 +7,9 @@ import com.example.shudata.database.dao.HiraganaDao
 import com.example.shudata.database.dao.KatakanaDao
 import com.example.shudata.di.RenshuDataModule.Bindings
 import com.example.shudata.kana.data.KanaService
+import com.example.shudata.kana.data.RemoteGetKanaExercisesRepository
 import com.example.shudata.kana.data.RemoteGetKanaRepository
+import com.example.shudomain.exercise.repository.GetKanaExercisesRepository
 import com.example.shudomain.practice.repository.GetKanaRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -69,6 +71,9 @@ class RenshuDataModule {
 
         @Binds
         fun bindKanaRepository(repository: RemoteGetKanaRepository): GetKanaRepository
+
+        @Binds
+        fun bindKanaExerciseRepository(repository: RemoteGetKanaExercisesRepository): GetKanaExercisesRepository
 
     }
 }

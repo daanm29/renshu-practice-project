@@ -37,4 +37,6 @@
     <string name="alphabet_example_japanese"><b>日本語:</b></string>
     <string name="alphabet_example_meaning"><b>意味:</b></string>
     <string name="alphabet_example_romaji"><b>ローマ字:</b></string>
+    <string name="kana_exercise_title">Exercise: %s</string>
+    <string name="kana_exercise_progress_title"><b>Progress:</b></string>
 </resources>

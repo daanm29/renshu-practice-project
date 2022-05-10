@@ -22,6 +22,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_fragment_practice_to_fragment_kana_exercise"
+            app:destination="@id/fragment_kana_exercise" />
     </fragment>
     <fragment
         android:id="@+id/fragment_settings"
@@ -72,5 +75,15 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_kana_exercise"
+        android:name="com.example.renshu.practice.exercise.KanaExerciseFragment"
+        android:label="KanaExerciseFragment"
+        tools:layout="@layout/fragment_kana_exercise">
+        <argument
+            android:name="alphabet"
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
 </navigation>

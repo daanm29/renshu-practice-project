@@ -6,13 +6,17 @@ sealed class PracticeNavigationAction {
         val character: String,
     ) : PracticeNavigationAction()
 
-    object OpenHiraganaPractice : PracticeNavigationAction()
+    data class OpenHiraganaPractice(
+        val alphabet: String,
+    ) : PracticeNavigationAction()
 
     data class OpenKatakana(
         val character: String,
     ) : PracticeNavigationAction()
 
-    object OpenKatakanaPractice: PracticeNavigationAction()
+    data class OpenKatakanaPractice(
+        val alphabet: String,
+    ): PracticeNavigationAction()
 
     data class OpenList(
         val listId: String,
