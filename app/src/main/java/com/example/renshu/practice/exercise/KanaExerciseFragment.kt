@@ -1,6 +1,7 @@
 package com.example.renshu.practice.exercise
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -9,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.renshu.R
 import com.example.renshu.databinding.FragmentKanaExerciseBinding
+import com.example.renshu.generic.DialogExtension.showQuitExerciseDialog
 import com.example.shudomain.exercise.model.AlphabetExercise
 import com.example.shupresentation.generic.mvvm.UIState
 import com.example.shupresentation.practice.exercise.ExerciseNavigationAction
@@ -54,8 +56,11 @@ class KanaExerciseFragment : DaggerFragment(R.layout.fragment_kana_exercise) {
     }
 
     private fun initData(alphabetExercise: AlphabetExercise) {
+        initProgressBar(alphabetExercise)
+        initBackNavigation(alphabetExercise)
+
         if (!alphabetExercise.exercisesTodo.isNullOrEmpty()) {
-        val currentExercise = alphabetExercise.exercisesTodo[0]
+            val currentExercise = alphabetExercise.exercisesTodo[0]
 
             ui.character.text = currentExercise.exerciseCharacter
 
@@ -100,6 +105,19 @@ class KanaExerciseFragment : DaggerFragment(R.layout.fragment_kana_exercise) {
         } else {
             alphabetExercise.completed = true
             viewModel.openPracticeFragment(alphabetExercise)
+        }
+    }
+
+    private fun initProgressBar(alphabetExercise: AlphabetExercise) {
+        ui.progressBar.max = alphabetExercise.exercisesDone.size + alphabetExercise.exercisesTodo.size
+        ui.progressBar.progress = alphabetExercise.exercisesDone.size
+    }
+
+    private fun initBackNavigation(alphabetExercise: AlphabetExercise) {
+        ui.toolbar.setNavigationOnClickListener {
+            requireContext().showQuitExerciseDialog(alphabetExercise) {
+                viewModel.openPracticeFragment(alphabetExercise)
+            }
         }
     }
 }

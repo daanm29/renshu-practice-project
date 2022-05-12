@@ -27,7 +27,6 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
 
     private lateinit var sharedPreferences: SharedPreferences
 
-    /* TODO: DO THE THINGS WITH THE VIEWMODEL */
     private val viewModel by viewModels<HomeViewModel> { viewModelFactory }
     private val ui by viewBinding<FragmentHomeBinding>()
 
@@ -36,6 +35,7 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
 
         sharedPreferences = requireContext().getSharedPreferences("app_settings", Context.MODE_PRIVATE)
         setCurrentMonth()
+        observeViewModel()
     }
 
     private fun setCurrentMonth() {
@@ -49,6 +49,14 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
             .setMinimumDate(calendarDay)
             .commit()
     }
+
+    /*private fun observeViewModel() {
+        viewModel.navigation.observe(viewLifecycleOwner, ::handleNavigation)
+        viewModel.uiState.observe(viewLifecycleOwner, ::handleUIState)
+        viewModel.hiragana.observe(viewLifecycleOwner, ::handleHiragana)
+        viewModel.katakana.observe(viewLifecycleOwner, ::handleKatakan)
+        viewModel.streak.observe(viewLifecycleOwner, ::handleStreak)
+    }*/
 
     companion object {
 

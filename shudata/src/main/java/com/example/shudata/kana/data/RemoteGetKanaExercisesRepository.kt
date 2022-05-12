@@ -5,19 +5,26 @@ import com.example.shudata.database.EntityConverter.toHiraganaProgressEntity
 import com.example.shudata.database.EntityConverter.toKatakanaProgressEntity
 import com.example.shudata.database.dao.HiraganaDao
 import com.example.shudata.database.dao.KatakanaDao
+import com.example.shudata.database.dao.StreakDao
+import com.example.shudata.database.entity.StreakEntity
 import com.example.shudomain.exercise.model.AlphabetExercise
 import com.example.shudomain.exercise.model.AlphabetExerciseCharacter
 import com.example.shudomain.exercise.repository.GetKanaExercisesRepository
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class RemoteGetKanaExercisesRepository @Inject constructor(
     private val hiraganaDao: HiraganaDao,
     private val katakanaDao: KatakanaDao,
+    private val streakDao: StreakDao,
 ) : GetKanaExercisesRepository {
 
     override fun getAllHiraganaExercises(): Single<AlphabetExercise> {
         val hiraganaExercises = hiraganaDao.getHiraganaProgress()
+
         return Single.create { emitter ->
             if (hiraganaExercises.isNullOrEmpty()) {
                 val alphabetExercise = AlphabetExercise(
@@ -197,12 +204,12 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
             AlphabetExerciseCharacter(
                 exerciseCharacter = "ま",
                 correctAnswer = "ma",
-                exerciseAnswers = listOf("o", "i", "a")
+                exerciseAnswers = listOf("yo", "ha", "ma")
             ),
             AlphabetExerciseCharacter(
                 exerciseCharacter = "み",
                 correctAnswer = "mi",
-                exerciseAnswers = listOf("o", "a", "u")
+                exerciseAnswers = listOf("na", "i", "mi")
             ),
             AlphabetExerciseCharacter(
                 exerciseCharacter = "む",
@@ -586,6 +593,28 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
         )
     }
 
+    override fun saveHiraganaExercise(alphabetExercise: AlphabetExercise): Completable {
+        return Completable.create { emitter ->
+            val currentStreak = streakDao.getCurrentStreak()
+
+            if (currentStreak == null) {
+                streakDao.insertStreak(StreakEntity(
+                    startDate = Date(),
+                    streakLength = 1,
+                    currentDate = Date()
+                ))
+            } else {
+                currentStreak.currentDate = Date()
+                currentStreak.streakLength = currentStreak.streakLength + 1
+                streakDao.insertStreak(currentStreak)
+            }
+
+            hiraganaDao.insertHiraganaProgress(alphabetExercise.toHiraganaProgressEntity())
+            hiraganaDao.deleteOldHiraganaExercises()
+            emitter.onComplete()
+        }
+    }
+
     override fun getAllKatakanaExercise(): Single<AlphabetExercise> {
         val katakanaExercise = katakanaDao.getKatakanaProgress()
 
@@ -651,7 +680,7 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
                 exerciseAnswers = listOf("ku", "pu", "gu")
             ),
             AlphabetExerciseCharacter(
-                exerciseCharacter = "ク",
+                exerciseCharacter = "ケ",
                 correctAnswer = "ke",
                 exerciseAnswers = listOf("re", "ke", "pe")
             ),
@@ -1155,5 +1184,13 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
                 exerciseAnswers = listOf("pyo", "gya", "hyo")
             ),
         )
+    }
+
+    override fun saveKatakanaExercise(alphabetExercise: AlphabetExercise): Completable {
+        return Completable.create { emitter ->
+            katakanaDao.insertKatakanaProgress(alphabetExercise.toKatakanaProgressEntity())
+            katakanaDao.deleteOldHiraganaExercises()
+            emitter.onComplete()
+        }
     }
 }

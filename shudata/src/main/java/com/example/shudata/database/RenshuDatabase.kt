@@ -1,15 +1,15 @@
 package com.example.shudata.database
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import com.example.shudata.database.dao.HiraganaDao
 import com.example.shudata.database.dao.KatakanaDao
-import com.example.shudata.database.entity.HiraganaEntity
-import com.example.shudata.database.entity.HiraganaProgressEntity
-import com.example.shudata.database.entity.KatakanaEntity
-import com.example.shudata.database.entity.KatakanaProgressEntity
+import com.example.shudata.database.dao.StreakDao
+import com.example.shudata.database.entity.*
 
 @Database(
     entities = [
@@ -17,15 +17,18 @@ import com.example.shudata.database.entity.KatakanaProgressEntity
         HiraganaProgressEntity::class,
         KatakanaEntity::class,
         KatakanaProgressEntity::class,
+        StreakEntity::class,
     ],
-    version = 1,
-    exportSchema = false
+    version = 2,
+    exportSchema = false,
 )
 abstract class RenshuDatabase : RoomDatabase() {
 
     abstract fun hiraganaDao(): HiraganaDao
 
     abstract fun katakanaDao(): KatakanaDao
+
+    abstract fun streakDao(): StreakDao
 
     companion object {
 
@@ -34,6 +37,7 @@ abstract class RenshuDatabase : RoomDatabase() {
         fun getInstance(context: Context): RenshuDatabase {
             return Room.databaseBuilder(context, RenshuDatabase::class.java, DATABASE_NAME)
                 .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
                 .build()
         }
     }

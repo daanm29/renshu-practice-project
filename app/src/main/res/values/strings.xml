@@ -39,4 +39,7 @@
     <string name="alphabet_example_romaji"><b>ローマ字:</b></string>
     <string name="kana_exercise_title">Exercise: %s</string>
     <string name="kana_exercise_progress_title"><b>Progress:</b></string>
+    <string name="dialog_body">Are you sure, you want to quit the exercise? Your progress will be saved.</string>
+    <string name="dialog_positive">Yes</string>
+    <string name="dialog_negative">No</string>
 </resources>

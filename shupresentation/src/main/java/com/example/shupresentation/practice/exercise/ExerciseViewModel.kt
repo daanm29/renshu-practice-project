@@ -5,8 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.shudomain.exercise.GetHiraganaExercises
 import com.example.shudomain.exercise.GetKatakanaExercises
+import com.example.shudomain.exercise.SaveHiraganaExercise
+import com.example.shudomain.exercise.SaveKatakanaExercise
 import com.example.shudomain.exercise.model.AlphabetExercise
 import com.example.shupresentation.generic.SingleLiveEvent
+import com.example.shupresentation.generic.mvvm.RxCompletableExtension.observeOnMain
+import com.example.shupresentation.generic.mvvm.RxCompletableExtension.subscribeOnIO
 import com.example.shupresentation.generic.mvvm.RxSingleExtension.observeOnMain
 import com.example.shupresentation.generic.mvvm.RxSingleExtension.postUIStateTo
 import com.example.shupresentation.generic.mvvm.RxSingleExtension.subscribeOnIO
@@ -19,7 +23,9 @@ import javax.inject.Inject
 class ExerciseViewModel @Inject constructor(
     private val exerciseViewModelArguments: ExerciseViewModelArguments,
     private val getAllKatakanaExercises: GetKatakanaExercises,
+    private val saveKatakanaExercise: SaveKatakanaExercise,
     private val getAllHiraganaExercises: GetHiraganaExercises,
+    private val saveHiraganaExercise: SaveHiraganaExercise,
 ) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
@@ -39,15 +45,11 @@ class ExerciseViewModel @Inject constructor(
     private fun getExercises(alphabet: String) {
         if (alphabet == "hiragana") {
             getAllHiraganaExercises()
-                .subscribeOnIO()
-                .observeOnMain()
                 .postUIStateTo(_uiState)
                 .subscribe(_exercises::postValue, Timber::e)
                 .addTo(compositeDisposable)
         } else {
             getAllKatakanaExercises()
-                .subscribeOnIO()
-                .observeOnMain()
                 .postUIStateTo(_uiState)
                 .subscribe(_exercises::postValue, Timber::e)
                 .addTo(compositeDisposable)
@@ -55,8 +57,15 @@ class ExerciseViewModel @Inject constructor(
     }
 
     fun openPracticeFragment(exercise: AlphabetExercise) {
-        _navigation.postValue(ExerciseNavigationAction.OpenPractice)
-        /* TODO: DO STUFF WITH EXERCISE */
+        if (exerciseViewModelArguments.alphabetType == "hiragana") {
+            saveHiraganaExercise(exercise)
+                .subscribe { _navigation.postValue(ExerciseNavigationAction.OpenPractice) }
+                .addTo(compositeDisposable)
+        } else {
+            saveKatakanaExercise(exercise)
+                .subscribe { _navigation.postValue(ExerciseNavigationAction.OpenPractice) }
+                .addTo(compositeDisposable)
+        }
     }
 
     override fun onCleared() {

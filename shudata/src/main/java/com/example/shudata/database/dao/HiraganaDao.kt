@@ -16,9 +16,12 @@ abstract class HiraganaDao {
     @Insert(onConflict = REPLACE)
     abstract fun insertHiragana(hiragana: List<HiraganaEntity>)
 
-    @Query("SELECT * FROM hiragana_progress ORDER BY date")
+    @Query("SELECT * FROM hiragana_progress ORDER BY date DESC")
     abstract fun getHiraganaProgress(): List<HiraganaProgressEntity>
 
     @Insert(onConflict = REPLACE)
     abstract fun insertHiraganaProgress(hiraganaProgress: HiraganaProgressEntity)
+
+    @Query("DELETE FROM hiragana_progress WHERE date <> (SELECT max(date) FROM hiragana_progress ORDER BY date DESC)")
+    abstract fun deleteOldHiraganaExercises()
 }

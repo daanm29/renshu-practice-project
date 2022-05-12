@@ -58,10 +58,9 @@
                     app:strokeColor="@color/red"
                     app:strokeWidth="3dp">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/hiraganaTitle"
@@ -83,11 +82,26 @@
                             android:layout_marginHorizontal="12dp"
                             android:layout_marginTop="14dp"
                             android:orientation="horizontal"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@id/hiraganaPracticeButton"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/hiraganaTitle"
                             tools:itemCount="2"
-                            tools:listitem="@layout/item_alphabet_character" />
+                            tools:listitem="@layout/item_alphabet_character"
+                            tools:visibility="visible" />
+
+                        <ProgressBar
+                            android:id="@+id/hiraganaLoadingBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:progressTint="@color/red"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@id/hiraganaPracticeButton"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/hiraganaTitle"
+                            tools:visibility="visible" />
 
                         <Button
                             android:id="@+id/hiraganaPracticeButton"
@@ -95,12 +109,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="16dp"
                             android:layout_marginTop="14dp"
-                            android:layout_marginBottom="14dp"
+                            android:layout_marginBottom="8dp"
+                            android:enabled="false"
                             android:text="@string/practice_hiragana_button"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/hiraganaRecyclerView" />
-                    </LinearLayout>
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -116,10 +131,9 @@
                     app:strokeColor="@color/red"
                     app:strokeWidth="3dp">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/katakanaTitle"
@@ -129,7 +143,10 @@
                             android:layout_marginTop="14dp"
                             android:text="@string/practice_title_katakana"
                             android:textSize="22sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/katakanaRecyclerView"
@@ -138,8 +155,26 @@
                             android:layout_marginHorizontal="12dp"
                             android:layout_marginTop="14dp"
                             android:orientation="horizontal"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@id/katakanaPracticeButton"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/katakanaTitle"
                             tools:itemCount="2"
-                            tools:listitem="@layout/item_alphabet_character" />
+                            tools:listitem="@layout/item_alphabet_character"
+                            tools:visibility="visible" />
+
+                        <ProgressBar
+                            android:id="@+id/katakanaLoadingBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:progressTint="@color/red"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@id/katakanaPracticeButton"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/katakanaTitle"
+                            tools:visibility="visible" />
 
                         <Button
                             android:id="@+id/katakanaPracticeButton"
@@ -147,9 +182,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="16dp"
                             android:layout_marginTop="14dp"
-                            android:layout_marginBottom="14dp"
-                            android:text="@string/practice_katakana_button" />
-                    </LinearLayout>
+                            android:layout_marginBottom="8dp"
+                            android:enabled="false"
+                            android:text="@string/practice_katakana_button"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
                 <!-- TODO: ADD RECYCLERVIEW WITH LISTS AND ADD BUTTON TO ADD LISTS-->

@@ -45,8 +45,6 @@ class PracticeViewModel @Inject constructor(
 
     private fun getHiragana() {
         getAllHiragana()
-            .subscribeOnIO()
-            .observeOnMain()
             .postUIStateTo(_uiState)
             .subscribe(_hiragana::postValue, Timber::e)
             .addTo(compositeDisposable)
@@ -54,8 +52,6 @@ class PracticeViewModel @Inject constructor(
 
     private fun getKatakana() {
         getAllKatakana()
-            .subscribeOnIO()
-            .observeOnMain()
             .postUIStateTo(_uiState)
             .subscribe(_katakana::postValue, Timber::e)
             .addTo(compositeDisposable)

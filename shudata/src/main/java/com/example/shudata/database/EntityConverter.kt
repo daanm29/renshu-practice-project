@@ -1,11 +1,9 @@
 package com.example.shudata.database
 
-import com.example.shudata.database.entity.HiraganaEntity
-import com.example.shudata.database.entity.HiraganaProgressEntity
-import com.example.shudata.database.entity.KatakanaEntity
-import com.example.shudata.database.entity.KatakanaProgressEntity
+import com.example.shudata.database.entity.*
 import com.example.shudomain.practice.model.AlphabetCharacter
 import com.example.shudomain.exercise.model.AlphabetExercise
+import com.example.shudomain.exercise.model.ExerciseStreak
 import java.util.*
 
 object EntityConverter {
@@ -69,6 +67,22 @@ object EntityConverter {
             exercisesTodo = this.exercisesTodo,
             practiceData = Date(),
             completed = this.completed
+        )
+    }
+
+    internal fun StreakEntity.toExerciseStreak(): ExerciseStreak {
+        return ExerciseStreak(
+            startDate = this.startDate,
+            currentDate = this.currentDate,
+            streakLength = this.streakLength,
+        )
+    }
+
+    internal fun ExerciseStreak.toStreakEntity(): StreakEntity {
+        return StreakEntity(
+            startDate = this.startDate,
+            currentDate = this.currentDate,
+            streakLength = this.streakLength
         )
     }
 }

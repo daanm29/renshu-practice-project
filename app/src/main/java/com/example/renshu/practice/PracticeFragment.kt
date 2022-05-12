@@ -48,8 +48,12 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
             is PracticeNavigationAction.OpenHiragana -> openHiraganaCharacter(action.character)
             is PracticeNavigationAction.OpenKatakana -> openKatakanaCharacter(action.character)
             is PracticeNavigationAction.OpenList -> {}
-            is PracticeNavigationAction.OpenHiraganaPractice -> { openKanaExercise(action.alphabet) }
-            is PracticeNavigationAction.OpenKatakanaPractice -> { openKanaExercise(action.alphabet) }
+            is PracticeNavigationAction.OpenHiraganaPractice -> {
+                openKanaExercise(action.alphabet)
+            }
+            is PracticeNavigationAction.OpenKatakanaPractice -> {
+                openKanaExercise(action.alphabet)
+            }
         }
     }
 
@@ -61,7 +65,7 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
                 .setAlphabet(getString(R.string.alphabet_hiragana))
         )
     }
-    
+
     private fun openKanaExercise(alphabet: String) {
         findNavController().navigate(
             PracticeFragmentDirections
@@ -81,9 +85,15 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
 
     private fun handleUIState(state: UIState) {
         when (state) {
-            UIState.NORMAL -> {}
-            UIState.LOADING -> {}
-            UIState.ERROR -> {}
+            UIState.NORMAL -> {
+                enablePractice()
+            }
+            UIState.LOADING -> {
+                disablePractice()
+            }
+            UIState.ERROR -> {
+                disablePractice()
+            }
         }
     }
 
@@ -115,5 +125,27 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
         ui.katakanaPracticeButton.setOnClickListener {
             viewModel.openKatakanaPractice(requireContext().getString(R.string.alphabet_katakana).lowercase())
         }
+    }
+
+    private fun enablePractice() {
+        ui.hiraganaPracticeButton.isEnabled = true
+        ui.katakanaPracticeButton.isEnabled = true
+
+        ui.katakanaRecyclerView.visibility = View.VISIBLE
+        ui.hiraganaRecyclerView.visibility = View.VISIBLE
+
+        ui.katakanaLoadingBar.visibility = View.GONE
+        ui.hiraganaLoadingBar.visibility = View.GONE
+    }
+
+    private fun disablePractice() {
+        ui.hiraganaPracticeButton.isEnabled = false
+        ui.katakanaPracticeButton.isEnabled = false
+
+        ui.katakanaRecyclerView.visibility = View.GONE
+        ui.hiraganaRecyclerView.visibility = View.GONE
+
+        ui.katakanaLoadingBar.visibility = View.VISIBLE
+        ui.hiraganaLoadingBar.visibility = View.VISIBLE
     }
 }

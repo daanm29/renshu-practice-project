@@ -39,15 +39,11 @@ class AlphabetViewModel @Inject constructor(
     private fun getAlphabet(alphabet: String) {
         if (alphabet.lowercase() == "hiragana") {
             getAllHiragana()
-                .subscribeOnIO()
-                .observeOnMain()
                 .postUIStateTo(_uiState)
                 .subscribe(_alphabet::postValue, Timber::e)
                 .addTo(compositeDisposable)
         } else {
             getAllKatakana()
-                .subscribeOnIO()
-                .observeOnMain()
                 .postUIStateTo(_uiState)
                 .subscribe(_alphabet::postValue, Timber::e)
                 .addTo(compositeDisposable)
