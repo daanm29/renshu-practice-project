@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.example.shudomain.exercise.GetHiraganaExercises
 import com.example.shudomain.exercise.GetKatakanaExercises
 import com.example.shudomain.exercise.GetSteak
+import com.example.shudomain.exercise.model.AlphabetExerciseCharacter
 import com.example.shudomain.exercise.model.ExerciseStreak
 import com.example.shudomain.practice.model.AlphabetCharacter
 import com.example.shupresentation.generic.SingleLiveEvent
+import com.example.shupresentation.generic.mvvm.RxSingleExtension.observeOnMain
 import com.example.shupresentation.generic.mvvm.RxSingleExtension.postUIStateTo
+import com.example.shupresentation.generic.mvvm.RxSingleExtension.subscribeOnIO
 import com.example.shupresentation.generic.mvvm.UIState
 import com.example.shupresentation.home.HomeNavigationAction.*
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -18,7 +21,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    private val getStreak: GetSteak,
+    private val getStreaks: GetSteak,
     private val getHiraganaExercises: GetHiraganaExercises,
     private val getKatakanaExercises: GetKatakanaExercises,
 ) : ViewModel() {
@@ -31,43 +34,58 @@ class HomeViewModel @Inject constructor(
     private val _uiState = MutableLiveData<UIState>()
     val uiState: LiveData<UIState> = _uiState
 
-    private val _streak = MutableLiveData<ExerciseStreak>()
-    val streak: LiveData<ExerciseStreak> by lazy {
-        getCurrentStreak()
+    private val _streak = MutableLiveData<List<ExerciseStreak>>()
+    val streak: LiveData<List<ExerciseStreak>> by lazy {
         _streak
     }
 
-    private val _hiragana = MutableLiveData<List<AlphabetCharacter>>()
-    val hiragana: LiveData<List<AlphabetCharacter>> by lazy {
-        getHiraganaExercise()
+    private val _hiragana = MutableLiveData<List<List<AlphabetExerciseCharacter>>>()
+    val hiragana: LiveData<List<List<AlphabetExerciseCharacter>>> by lazy {
         _hiragana
     }
 
-    private val _katakana = MutableLiveData<List<AlphabetCharacter>>()
-    val katakana: LiveData<List<AlphabetCharacter>> by lazy {
-        getKatakanaExercise()
+    private val _katakana = MutableLiveData<List<List<AlphabetExerciseCharacter>>>()
+    val katakana: LiveData<List<List<AlphabetExerciseCharacter>>> by lazy {
         _katakana
     }
 
     private fun getCurrentStreak() {
-        getStreak()
+        getStreaks()
+            .subscribeOnIO()
+            .observeOnMain()
             .postUIStateTo(_uiState)
-            .subscribe(_streak::postValue, Timber::e)
+            .subscribe({
+                _streak.postValue(it)
+                getHiraganaExercise()
+            }, Timber::e)
             .addTo(compositeDisposable)
     }
 
     private fun getHiraganaExercise() {
         getHiraganaExercises()
+            .subscribeOnIO()
+            .observeOnMain()
             .postUIStateTo(_uiState)
-            .subscribe()
+            .subscribe({
+                _hiragana.postValue(listOf(it.exercisesDone.toList(), it.exercisesTodo.toList()))
+                getKatakanaExercise()
+            }, Timber::e)
             .addTo(compositeDisposable)
     }
 
     private fun getKatakanaExercise() {
         getKatakanaExercises()
+            .subscribeOnIO()
+            .observeOnMain()
             .postUIStateTo(_uiState)
-            .subscribe()
+            .subscribe({
+                       _katakana.postValue(listOf(it.exercisesDone.toList(), it.exercisesTodo.toList()))
+            }, Timber::e)
             .addTo(compositeDisposable)
+    }
+
+    fun retrieveData() {
+        getCurrentStreak()
     }
 
     fun openHiraganaLastPractice() {

@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.example.shudata.database.entity.KatakanaEntity
 import com.example.shudata.database.entity.KatakanaProgressEntity
+import com.example.shudomain.practice.model.AlphabetCharacter
 
 @Dao
 abstract class KatakanaDao {

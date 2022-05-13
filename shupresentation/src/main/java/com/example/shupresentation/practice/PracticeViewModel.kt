@@ -39,14 +39,16 @@ class PracticeViewModel @Inject constructor(
 
     private val _katakana = MutableLiveData<List<AlphabetCharacter>>()
     val katakana: LiveData<List<AlphabetCharacter>> by lazy {
-        getKatakana()
         _katakana
     }
 
     private fun getHiragana() {
         getAllHiragana()
             .postUIStateTo(_uiState)
-            .subscribe(_hiragana::postValue, Timber::e)
+            .subscribe({
+                _hiragana.postValue(it)
+                getKatakana()
+            }, Timber::e)
             .addTo(compositeDisposable)
     }
 

@@ -58,7 +58,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/testOne"
+                    android:id="@+id/streakCardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="14dp"
@@ -98,39 +98,6 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <TextView
-                    android:id="@+id/listProgressTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="14dp"
-                    android:layout_marginTop="14dp"
-                    android:text="@string/home_list_progress_title"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/testOne" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/testTwo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="14dp"
-                    android:layout_marginTop="4dp"
-                    app:cardCornerRadius="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/listProgressTitle"
-                    app:strokeColor="@color/red"
-                    app:strokeWidth="3dp">
-
-                    <com.example.renshu.generic.view.DualStudyProgressBar
-                        android:id="@+id/studyProgressBar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="14dp" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <TextView
                     android:id="@+id/hiraganaProgressTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -141,10 +108,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/testTwo" />
+                    app:layout_constraintTop_toBottomOf="@id/streakCardView" />
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/testThree"
+                    android:id="@+id/hiraganaCardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="14dp"
@@ -175,10 +142,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/testThree" />
+                    app:layout_constraintTop_toBottomOf="@id/hiraganaCardView" />
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/testFour"
+                    android:id="@+id/katakanaCardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="14dp"

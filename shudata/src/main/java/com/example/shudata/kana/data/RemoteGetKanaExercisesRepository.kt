@@ -1,5 +1,7 @@
 package com.example.shudata.kana.data
 
+import android.annotation.SuppressLint
+import android.util.Log
 import com.example.shudata.database.EntityConverter.toAlphabetExercise
 import com.example.shudata.database.EntityConverter.toHiraganaProgressEntity
 import com.example.shudata.database.EntityConverter.toKatakanaProgressEntity
@@ -7,14 +9,16 @@ import com.example.shudata.database.dao.HiraganaDao
 import com.example.shudata.database.dao.KatakanaDao
 import com.example.shudata.database.dao.StreakDao
 import com.example.shudata.database.entity.StreakEntity
+import com.example.shudata.kana.DateExtension.isDateEqual
+import com.example.shudata.kana.DateExtension.isDateEqualYesterday
 import com.example.shudomain.exercise.model.AlphabetExercise
 import com.example.shudomain.exercise.model.AlphabetExerciseCharacter
 import com.example.shudomain.exercise.repository.GetKanaExercisesRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import java.time.Instant
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class RemoteGetKanaExercisesRepository @Inject constructor(
     private val hiraganaDao: HiraganaDao,
@@ -597,16 +601,27 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
         return Completable.create { emitter ->
             val currentStreak = streakDao.getCurrentStreak()
 
-            if (currentStreak == null) {
+            if (currentStreak.isNullOrEmpty()) {
                 streakDao.insertStreak(StreakEntity(
-                    startDate = Date(),
+                    startDate = Date(System.currentTimeMillis()),
                     streakLength = 1,
-                    currentDate = Date()
+                    currentDate = Date(System.currentTimeMillis())
                 ))
             } else {
-                currentStreak.currentDate = Date()
-                currentStreak.streakLength = currentStreak.streakLength + 1
-                streakDao.insertStreak(currentStreak)
+                if (!currentStreak[0].currentDate.isDateEqual(Date()) && currentStreak[0].currentDate.isDateEqualYesterday(Date())) {
+                    val changeCurrent = currentStreak[0]
+                    changeCurrent.apply {
+                        currentDate = Date(System.currentTimeMillis())
+                        streakLength += 1
+                    }
+                    streakDao.insertStreak(changeCurrent)
+                } else {
+                    streakDao.insertStreak(StreakEntity(
+                        startDate = Date(System.currentTimeMillis()),
+                        streakLength = 1,
+                        currentDate = Date(System.currentTimeMillis())
+                    ))
+                }
             }
 
             hiraganaDao.insertHiraganaProgress(alphabetExercise.toHiraganaProgressEntity())
@@ -797,12 +812,12 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
             AlphabetExerciseCharacter(
                 exerciseCharacter = "マ",
                 correctAnswer = "ma",
-                exerciseAnswers = listOf("o", "i", "a")
+                exerciseAnswers = listOf("ya", "a", "ma")
             ),
             AlphabetExerciseCharacter(
                 exerciseCharacter = "ミ",
                 correctAnswer = "mi",
-                exerciseAnswers = listOf("o", "a", "u")
+                exerciseAnswers = listOf("mi", "mo", "i")
             ),
             AlphabetExerciseCharacter(
                 exerciseCharacter = "ム",
@@ -1188,6 +1203,31 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
 
     override fun saveKatakanaExercise(alphabetExercise: AlphabetExercise): Completable {
         return Completable.create { emitter ->
+            val currentStreak = streakDao.getCurrentStreak()
+
+            if (currentStreak.isNullOrEmpty()) {
+                streakDao.insertStreak(StreakEntity(
+                    startDate = Date(System.currentTimeMillis()),
+                    streakLength = 1,
+                    currentDate = Date(System.currentTimeMillis())
+                ))
+            } else {
+                if (!currentStreak[0].currentDate.isDateEqual(Date()) && currentStreak[0].currentDate.isDateEqualYesterday(Date())) {
+                    val changeCurrent = currentStreak[0]
+                    changeCurrent.apply {
+                        currentDate = Date(System.currentTimeMillis())
+                        streakLength += 1
+                    }
+                    streakDao.insertStreak(changeCurrent)
+                } else {
+                    streakDao.insertStreak(StreakEntity(
+                        startDate = Date(System.currentTimeMillis()),
+                        streakLength = 1,
+                        currentDate = Date(System.currentTimeMillis())
+                    ))
+                }
+            }
+
             katakanaDao.insertKatakanaProgress(alphabetExercise.toKatakanaProgressEntity())
             katakanaDao.deleteOldHiraganaExercises()
             emitter.onComplete()

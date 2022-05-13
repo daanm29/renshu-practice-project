@@ -6,7 +6,7 @@ import io.reactivex.rxjava3.core.Single
 
 interface GetStreakRepository {
 
-    fun getCurrentStreak(): Single<ExerciseStreak>
+    fun getStreaks(): Single<List<ExerciseStreak>>
 
     fun insertCurrentStreak(streak: ExerciseStreak): Completable
 }

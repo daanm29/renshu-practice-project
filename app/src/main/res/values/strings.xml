@@ -42,4 +42,6 @@
     <string name="dialog_body">Are you sure, you want to quit the exercise? Your progress will be saved.</string>
     <string name="dialog_positive">Yes</string>
     <string name="dialog_negative">No</string>
+    <string name="practice_add_list_button">Add list</string>
+    <string name="custom_list_title"><b>%s</b></string>
 </resources>

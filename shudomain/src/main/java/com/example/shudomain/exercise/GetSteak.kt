@@ -9,7 +9,7 @@ class GetSteak @Inject constructor(
     private val getStreakRepository: GetStreakRepository
 ) {
 
-    operator fun invoke(): Single<ExerciseStreak> {
-        return getStreakRepository.getCurrentStreak()
+    operator fun invoke(): Single<List<ExerciseStreak>> {
+        return getStreakRepository.getStreaks()
     }
 }

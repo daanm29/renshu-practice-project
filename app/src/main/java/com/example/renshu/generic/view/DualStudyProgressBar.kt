@@ -37,14 +37,13 @@ class DualStudyProgressBar @JvmOverloads constructor(
             continueButton.isEnabled = value
         }
 
-    var onButtonClicked: (() -> Unit)? = null
+    var onButtonClicked: Button? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.custom_dual_study_progress_bar, this)
-        val attributes = context.obtainStyledAttributes(attrs, R.styleable.DualStudyProgressBar)
+        onButtonClicked = findViewById(R.id.continueButton)
 
-        val studyContinueButton: Button = findViewById(R.id.continueButton)
-        studyContinueButton.setOnClickListener { onButtonClicked?.invoke() }
+        val attributes = context.obtainStyledAttributes(attrs, R.styleable.DualStudyProgressBar)
 
         val totalTextView: TextView = findViewById(R.id.totalProgressTitle)
         totalTextView.isVisible = attributes.getBoolean(R.styleable.DualStudyProgressBar_enableTotalStreak, true)

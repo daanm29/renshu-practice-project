@@ -13,13 +13,11 @@ class RemoteGetStreakRepository @Inject constructor(
     private val streakDao: StreakDao
 ) : GetStreakRepository {
 
-    override fun getCurrentStreak(): Single<ExerciseStreak> {
+    override fun getStreaks(): Single<List<ExerciseStreak>> {
         val currentStreak = streakDao.getCurrentStreak()
 
         return Single.create { emitter ->
-            if (currentStreak != null) {
-                emitter.onSuccess(currentStreak.toExerciseStreak())
-            }
+            emitter.onSuccess(currentStreak.map { it.toExerciseStreak() })
         }
     }
 

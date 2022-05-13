@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.example.shudata.database.entity.HiraganaEntity
 import com.example.shudata.database.entity.HiraganaProgressEntity
+import com.example.shudomain.practice.model.AlphabetCharacter
 
 @Dao
 abstract class HiraganaDao {

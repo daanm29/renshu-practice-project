@@ -45,11 +45,15 @@ class ExerciseViewModel @Inject constructor(
     private fun getExercises(alphabet: String) {
         if (alphabet == "hiragana") {
             getAllHiraganaExercises()
+                .subscribeOnIO()
+                .observeOnMain()
                 .postUIStateTo(_uiState)
                 .subscribe(_exercises::postValue, Timber::e)
                 .addTo(compositeDisposable)
         } else {
             getAllKatakanaExercises()
+                .subscribeOnIO()
+                .observeOnMain()
                 .postUIStateTo(_uiState)
                 .subscribe(_exercises::postValue, Timber::e)
                 .addTo(compositeDisposable)
@@ -59,10 +63,14 @@ class ExerciseViewModel @Inject constructor(
     fun openPracticeFragment(exercise: AlphabetExercise) {
         if (exerciseViewModelArguments.alphabetType == "hiragana") {
             saveHiraganaExercise(exercise)
+                .subscribeOnIO()
+                .observeOnMain()
                 .subscribe { _navigation.postValue(ExerciseNavigationAction.OpenPractice) }
                 .addTo(compositeDisposable)
         } else {
             saveKatakanaExercise(exercise)
+                .subscribeOnIO()
+                .observeOnMain()
                 .subscribe { _navigation.postValue(ExerciseNavigationAction.OpenPractice) }
                 .addTo(compositeDisposable)
         }
