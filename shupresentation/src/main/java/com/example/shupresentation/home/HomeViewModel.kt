@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.shudomain.exercise.GetHiraganaExercises
 import com.example.shudomain.exercise.GetKatakanaExercises
 import com.example.shudomain.exercise.GetSteak
+import com.example.shudomain.exercise.model.AlphabetExercise
 import com.example.shudomain.exercise.model.AlphabetExerciseCharacter
 import com.example.shudomain.exercise.model.ExerciseStreak
 import com.example.shudomain.practice.model.AlphabetCharacter
@@ -39,13 +40,13 @@ class HomeViewModel @Inject constructor(
         _streak
     }
 
-    private val _hiragana = MutableLiveData<List<List<AlphabetExerciseCharacter>>>()
-    val hiragana: LiveData<List<List<AlphabetExerciseCharacter>>> by lazy {
+    private val _hiragana = MutableLiveData<AlphabetExercise>()
+    val hiragana: LiveData<AlphabetExercise> by lazy {
         _hiragana
     }
 
-    private val _katakana = MutableLiveData<List<List<AlphabetExerciseCharacter>>>()
-    val katakana: LiveData<List<List<AlphabetExerciseCharacter>>> by lazy {
+    private val _katakana = MutableLiveData<AlphabetExercise>()
+    val katakana: LiveData<AlphabetExercise> by lazy {
         _katakana
     }
 
@@ -67,7 +68,7 @@ class HomeViewModel @Inject constructor(
             .observeOnMain()
             .postUIStateTo(_uiState)
             .subscribe({
-                _hiragana.postValue(listOf(it.exercisesDone.toList(), it.exercisesTodo.toList()))
+                _hiragana.postValue(it)
                 getKatakanaExercise()
             }, Timber::e)
             .addTo(compositeDisposable)
@@ -78,9 +79,7 @@ class HomeViewModel @Inject constructor(
             .subscribeOnIO()
             .observeOnMain()
             .postUIStateTo(_uiState)
-            .subscribe({
-                       _katakana.postValue(listOf(it.exercisesDone.toList(), it.exercisesTodo.toList()))
-            }, Timber::e)
+            .subscribe(_katakana::postValue, Timber::e)
             .addTo(compositeDisposable)
     }
 

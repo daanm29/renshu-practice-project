@@ -20,6 +20,8 @@ class BottomNavigationManager @Inject constructor(private val mainActivity: Main
         R.id.fragment_app_info,
         R.id.fragment_alphabet,
         R.id.fragment_kana_exercise,
+        R.id.fragment_list_overview,
+        R.id.fragment_list_add,
     )
 
     fun initialize(onBottomBarShown: ((Boolean) -> Unit)? = null) {

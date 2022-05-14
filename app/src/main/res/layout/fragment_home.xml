@@ -123,12 +123,27 @@
                     app:strokeColor="@color/red"
                     app:strokeWidth="3dp">
 
-                    <com.example.renshu.generic.view.DualStudyProgressBar
-                        android:id="@+id/hiraganaProgressBar"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="14dp"
-                        app:enableTotalStreak="false" />
+                        android:orientation="vertical">
+
+                        <RatingBar
+                            android:id="@+id/hiraganaRatingBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:isIndicator="true"
+                            android:numStars="5"
+                            android:stepSize="0.5" />
+
+                        <com.example.renshu.generic.view.DualStudyProgressBar
+                            android:id="@+id/hiraganaProgressBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:enableTotalStreak="false" />
+                    </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
                 <TextView
@@ -158,12 +173,27 @@
                     app:strokeColor="@color/red"
                     app:strokeWidth="3dp">
 
-                    <com.example.renshu.generic.view.DualStudyProgressBar
-                        android:id="@+id/katakanaProgressBar"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="14dp"
-                        app:enableTotalStreak="false" />
+                        android:orientation="vertical">
+
+                        <RatingBar
+                            android:id="@+id/katakanaRatingBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:isIndicator="true"
+                            android:numStars="5"
+                            android:stepSize="0.5" />
+
+                        <com.example.renshu.generic.view.DualStudyProgressBar
+                            android:id="@+id/katakanaProgressBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:enableTotalStreak="false" />
+                    </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

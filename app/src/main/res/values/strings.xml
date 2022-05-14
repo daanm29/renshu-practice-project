@@ -7,7 +7,7 @@
     <string name="settings_app_info">App info</string>
     <string name="settings_notification_settings">Notification settings</string>
     <string name="settings_licenses">Licenses</string>
-    <string name="app_info_text">The Renshū app was made to help assist you in your way to become fluent in Japanese. In the app you can create word lists where you can practice Kanji/Hiragana/Katakana or anything else. \n\n <b>Features:</b> \n&#8226; Create Lists<br/> \n&#8226; Practice with the created lists<br/> \n&#8226; Receive reminders<br/> \n\n\n<b>App Version</b> \n%s</string>
+    <string name="app_info_text">The Renshū app was made to help assist you in your way to become fluent in Japanese. In the app you can create word lists where you can practice Kanji/Hiragana/Katakana or anything else. \n\n <b>Features:</b> \n&#8226; Create Lists<br /> \n&#8226; Practice with the created lists<br /> \n&#8226; Receive reminders<br /> \n\n\n<b>App Version</b> \n%s</string>
     <string name="app_info_title">App Info</string>
     <string name="custom_button_text">Custom button</string>
     <string name="streak_days">%s日</string>
@@ -44,4 +44,17 @@
     <string name="dialog_negative">No</string>
     <string name="practice_add_list_button">Add list</string>
     <string name="custom_list_title"><b>%s</b></string>
+    <string name="list_add_hint_kana">Kana</string>
+    <string name="list_add_hint_meaning">Meaning</string>
+    <string name="list_add_hint_word">Word</string>
+    <string name="list_add_button_add">Add</string>
+    <string name="list_add_button_remove">Remove</string>
+    <string name="list_add_button_create_list">Create list</string>
+    <string name="list_add_hint_description">List description</string>
+    <string name="list_add_hint_title">List title</string>
+    <string name="list_add_subtitle_word">Words:</string>
+    <string name="list_add_word_id">word%s</string>
+    <string name="list_add_meaning_id">meaning%s</string>
+    <string name="list_add_kana_id">kana%s</string>
+    <string name="list_add_subtitle_information">List Information:</string>
 </resources>

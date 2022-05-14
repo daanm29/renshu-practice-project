@@ -3,7 +3,6 @@ package com.example.renshu.home
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -12,13 +11,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.renshu.R
 import com.example.renshu.databinding.FragmentHomeBinding
 import com.example.renshu.generic.CalendarDayExtension.toCalendarDay
+import com.example.shudomain.exercise.model.AlphabetExercise
 import com.example.shudomain.exercise.model.AlphabetExerciseCharacter
 import com.example.shudomain.exercise.model.ExerciseStreak
 import com.example.shupresentation.generic.mvvm.UIState
 import com.example.shupresentation.home.HomeNavigationAction
 import com.example.shupresentation.home.HomeViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import dagger.android.support.DaggerFragment
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
@@ -52,7 +51,7 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
         val installDate = simpleDateFormat.parse(sharedPreferences.getString("install_date", "").toString())
             ?: simpleDateFormat.parse(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).toJavaLocalDateTime().toString())
 
-        val calendarDay = CalendarDay.from(installDate.year + YEAR, installDate.month + MONTH, installDate.day)
+        val calendarDay = CalendarDay.from(installDate.year + 1900, installDate.month + 1, installDate.day)
 
         ui.calendarView.state().edit()
             .setMinimumDate(calendarDay)
@@ -105,7 +104,7 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
             ui.streakLayout.lastStudied = lastStudied
 
             for (streak in streaks) {
-                getStreakDays(streak).forEach { ui.calendarView.selectedDate = it.toCalendarDay() }
+                getStreakDays(streak).forEach { ui.calendarView.setDateSelected(it.toCalendarDay(), true) }
 
                 if (streak.currentDate.date == Date().date) {
                     ui.streakLayout.currentStreak = streak.streakLength
@@ -127,8 +126,7 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
     }
 
     private fun getLastStudied(streak: ExerciseStreak): Int {
-        val timeDifference = Date().time - streak.currentDate.time
-        return ((((timeDifference / SECONDS) / HOUR) / DAY)).toInt()
+        return (((((Date().time - streak.currentDate.time) / 1000) / 60) / 60) / 24).toInt()
     }
 
     private fun getStreakDays(streak: ExerciseStreak): List<Date> {
@@ -150,13 +148,15 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
         return dateList
     }
 
-    private fun handleHiragana(hiraganaProgress: List<List<AlphabetExerciseCharacter>>) {
+    private fun handleHiragana(hiraganaProgress: AlphabetExercise) {
         ui.hiraganaProgressBar.apply {
-            totalProgress = hiraganaProgress[0].size + hiraganaProgress[1].size
-            currentProgress = hiraganaProgress[0].size
+            totalProgress = hiraganaProgress.exercisesTodo.size + hiraganaProgress.exercisesDone.size
+            currentProgress = hiraganaProgress.exercisesDone.size
         }
 
-        if (ui.hiraganaProgressBar.currentProgress > 0) {
+        ui.hiraganaRatingBar.rating = hiraganaProgress.mastered.toFloat() / 2
+
+        if (ui.hiraganaProgressBar.currentProgress > 0 || hiraganaProgress.mastered > 0) {
             ui.hiraganaProgressBar.buttonEnabled = true
             ui.hiraganaProgressBar.onButtonClicked?.setOnClickListener {
                 viewModel.openHiraganaLastPractice()
@@ -164,27 +164,19 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
         }
     }
 
-    private fun handleKatakana(katakanaProgress: List<List<AlphabetExerciseCharacter>>) {
+    private fun handleKatakana(katakanaProgress: AlphabetExercise) {
         ui.katakanaProgressBar.apply {
-            totalProgress = katakanaProgress[0].size + katakanaProgress[1].size
-            currentProgress = katakanaProgress[0].size
+            totalProgress = katakanaProgress.exercisesTodo.size + katakanaProgress.exercisesDone.size
+            currentProgress = katakanaProgress.exercisesDone.size
         }
 
-        if (ui.katakanaProgressBar.currentProgress > 0) {
+        ui.katakanaRatingBar.rating = katakanaProgress.mastered.toFloat() / 2
+
+        if (ui.katakanaProgressBar.currentProgress > 0 || katakanaProgress.mastered > 0) {
             ui.katakanaProgressBar.buttonEnabled = true
             ui.katakanaProgressBar.onButtonClicked?.setOnClickListener {
                 viewModel.openKatakanaLastPractice()
             }
         }
-    }
-
-    companion object {
-
-
-        private const val YEAR = 1900
-        private const val MONTH = 1
-        private const val DAY = 24
-        private const val HOUR = 60
-        private const val SECONDS = 1000
     }
 }

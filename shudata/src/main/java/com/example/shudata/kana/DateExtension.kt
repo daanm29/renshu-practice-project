@@ -10,7 +10,11 @@ object DateExtension {
             this.date == other.date
     }
 
-    fun Date.isDateEqualYesterday(other:Date): Boolean {
-        return other.date.plus(1) == this.date
+    fun Date.isOtherDateYesterday(other: Date): Boolean {
+        val calendar = Calendar.getInstance()
+        calendar.time = other
+        calendar.add(Calendar.DATE, 1)
+
+        return calendar.time.date == this.date
     }
 }

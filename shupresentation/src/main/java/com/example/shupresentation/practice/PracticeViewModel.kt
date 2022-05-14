@@ -3,6 +3,7 @@ package com.example.shupresentation.practice
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.shudomain.list.CustomList
 import com.example.shudomain.practice.GetAllHiragana
 import com.example.shudomain.practice.GetAllKatakana
 import com.example.shudomain.practice.model.AlphabetCharacter
@@ -20,7 +21,8 @@ import javax.inject.Inject
 class PracticeViewModel @Inject constructor(
     private val getAllHiragana: GetAllHiragana,
     private val getAllKatakana: GetAllKatakana,
-    /* TODO: ADD CUSTOM LIST SETTER AND GETTER */
+    //private val deleteCustomList: DeleteCustomList,
+    //private val getCustomLists: GetCustomLists,
 ) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
@@ -42,6 +44,11 @@ class PracticeViewModel @Inject constructor(
         _katakana
     }
 
+    private val _customLists = MutableLiveData<List<CustomList>>()
+    val customLists: LiveData<List<CustomList>> by lazy {
+        _customLists
+    }
+
     private fun getHiragana() {
         getAllHiragana()
             .postUIStateTo(_uiState)
@@ -55,8 +62,15 @@ class PracticeViewModel @Inject constructor(
     private fun getKatakana() {
         getAllKatakana()
             .postUIStateTo(_uiState)
-            .subscribe(_katakana::postValue, Timber::e)
+            .subscribe({
+                _katakana.postValue(it)
+                getCustomLists()
+            }, Timber::e)
             .addTo(compositeDisposable)
+    }
+
+    private fun getCustomLists() {
+
     }
 
     fun openHiragana(character: String) {
@@ -75,8 +89,16 @@ class PracticeViewModel @Inject constructor(
         _navigation.postValue(OpenKatakanaPractice(katakana))
     }
 
+    fun openAddList() {
+        _navigation.postValue(OpenAddList)
+    }
+
     fun openWordList(listId: String) {
         _navigation.postValue(OpenList(listId))
+    }
+
+    fun deleteList(listId: String) {
+
     }
 
     override fun onCleared() {

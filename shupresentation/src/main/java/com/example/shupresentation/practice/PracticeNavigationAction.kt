@@ -16,9 +16,11 @@ sealed class PracticeNavigationAction {
 
     data class OpenKatakanaPractice(
         val alphabet: String,
-    ): PracticeNavigationAction()
+    ) : PracticeNavigationAction()
 
     data class OpenList(
         val listId: String,
     ) : PracticeNavigationAction()
+
+    object OpenAddList : PracticeNavigationAction()
 }

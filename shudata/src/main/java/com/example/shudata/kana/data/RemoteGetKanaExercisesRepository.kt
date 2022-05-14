@@ -1,7 +1,5 @@
 package com.example.shudata.kana.data
 
-import android.annotation.SuppressLint
-import android.util.Log
 import com.example.shudata.database.EntityConverter.toAlphabetExercise
 import com.example.shudata.database.EntityConverter.toHiraganaProgressEntity
 import com.example.shudata.database.EntityConverter.toKatakanaProgressEntity
@@ -10,13 +8,12 @@ import com.example.shudata.database.dao.KatakanaDao
 import com.example.shudata.database.dao.StreakDao
 import com.example.shudata.database.entity.StreakEntity
 import com.example.shudata.kana.DateExtension.isDateEqual
-import com.example.shudata.kana.DateExtension.isDateEqualYesterday
+import com.example.shudata.kana.DateExtension.isOtherDateYesterday
 import com.example.shudomain.exercise.model.AlphabetExercise
 import com.example.shudomain.exercise.model.AlphabetExerciseCharacter
 import com.example.shudomain.exercise.repository.GetKanaExercisesRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
-import java.time.Instant
 import java.util.*
 import javax.inject.Inject
 
@@ -479,7 +476,7 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
             ),
             AlphabetExerciseCharacter(
                 exerciseCharacter = "にょ",
-                correctAnswer = "にょ",
+                correctAnswer = "nyo",
                 exerciseAnswers = listOf("pyu", "ni", "nyo")
             ),
             // Hya, Hyu, Hyo
@@ -507,7 +504,7 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
             AlphabetExerciseCharacter(
                 exerciseCharacter = "みゅ",
                 correctAnswer = "myu",
-                exerciseAnswers = listOf("みゅ", "yu", "shu")
+                exerciseAnswers = listOf("myu", "yu", "shu")
             ),
             AlphabetExerciseCharacter(
                 exerciseCharacter = "みょ",
@@ -582,7 +579,7 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
             AlphabetExerciseCharacter(
                 exerciseCharacter = "ぴゃ",
                 correctAnswer = "pya",
-                exerciseAnswers = listOf("bya", "ya", "hya")
+                exerciseAnswers = listOf("pya", "ya", "hya")
             ),
             AlphabetExerciseCharacter(
                 exerciseCharacter = "ぴゅ",
@@ -608,19 +605,27 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
                     currentDate = Date(System.currentTimeMillis())
                 ))
             } else {
-                if (!currentStreak[0].currentDate.isDateEqual(Date()) && currentStreak[0].currentDate.isDateEqualYesterday(Date())) {
-                    val changeCurrent = currentStreak[0]
-                    changeCurrent.apply {
+                if (!currentStreak[0].currentDate.isDateEqual(Date()) && Date().isOtherDateYesterday(currentStreak[0].currentDate)) {
+                    currentStreak[0].apply {
                         currentDate = Date(System.currentTimeMillis())
                         streakLength += 1
                     }
-                    streakDao.insertStreak(changeCurrent)
+                    streakDao.insertStreak(currentStreak[0])
                 } else {
                     streakDao.insertStreak(StreakEntity(
                         startDate = Date(System.currentTimeMillis()),
                         streakLength = 1,
                         currentDate = Date(System.currentTimeMillis())
                     ))
+                }
+            }
+
+            if (alphabetExercise.completed) {
+                alphabetExercise.apply {
+                    exercisesTodo.addAll(alphabetExercise.exercisesDone)
+                    exercisesDone.clear()
+                    completed = false
+                    if (alphabetExercise.mastered < 5) alphabetExercise.mastered += 1
                 }
             }
 
@@ -1083,7 +1088,7 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
             ),
             AlphabetExerciseCharacter(
                 exerciseCharacter = "ニョ",
-                correctAnswer = "にょ",
+                correctAnswer = "nyo",
                 exerciseAnswers = listOf("pyu", "ni", "nyo")
             ),
             // Hya, Hyu, Hyo
@@ -1111,7 +1116,7 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
             AlphabetExerciseCharacter(
                 exerciseCharacter = "ミュ",
                 correctAnswer = "myu",
-                exerciseAnswers = listOf("みゅ", "yu", "shu")
+                exerciseAnswers = listOf("myu", "yu", "shu")
             ),
             AlphabetExerciseCharacter(
                 exerciseCharacter = "ミョ",
@@ -1186,7 +1191,7 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
             AlphabetExerciseCharacter(
                 exerciseCharacter = "ピャ",
                 correctAnswer = "pya",
-                exerciseAnswers = listOf("bya", "ya", "hya")
+                exerciseAnswers = listOf("pya", "ya", "hya")
             ),
             AlphabetExerciseCharacter(
                 exerciseCharacter = "ピュ",
@@ -1212,19 +1217,27 @@ class RemoteGetKanaExercisesRepository @Inject constructor(
                     currentDate = Date(System.currentTimeMillis())
                 ))
             } else {
-                if (!currentStreak[0].currentDate.isDateEqual(Date()) && currentStreak[0].currentDate.isDateEqualYesterday(Date())) {
-                    val changeCurrent = currentStreak[0]
-                    changeCurrent.apply {
+                if (!currentStreak[0].currentDate.isDateEqual(Date()) && Date().isOtherDateYesterday(currentStreak[0].currentDate)) {
+                    currentStreak[0].apply {
                         currentDate = Date(System.currentTimeMillis())
                         streakLength += 1
                     }
-                    streakDao.insertStreak(changeCurrent)
+                    streakDao.insertStreak(currentStreak[0])
                 } else {
                     streakDao.insertStreak(StreakEntity(
                         startDate = Date(System.currentTimeMillis()),
                         streakLength = 1,
                         currentDate = Date(System.currentTimeMillis())
                     ))
+                }
+            }
+
+            if (alphabetExercise.completed) {
+                alphabetExercise.apply {
+                    exercisesTodo.addAll(alphabetExercise.exercisesDone)
+                    exercisesDone.clear()
+                    completed = false
+                    if (alphabetExercise.mastered < 5) alphabetExercise.mastered += 1
                 }
             }
 

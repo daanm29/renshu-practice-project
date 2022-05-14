@@ -4,5 +4,6 @@ data class AlphabetExercise(
     val currentItem: Int,
     val exercisesDone: ArrayList<AlphabetExerciseCharacter>,
     val exercisesTodo: ArrayList<AlphabetExerciseCharacter>,
-    var completed: Boolean = false
+    var completed: Boolean = false,
+    var mastered: Int = 0,
 )

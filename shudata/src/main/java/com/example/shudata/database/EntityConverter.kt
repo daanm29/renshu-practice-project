@@ -1,9 +1,9 @@
 package com.example.shudata.database
 
 import com.example.shudata.database.entity.*
-import com.example.shudomain.practice.model.AlphabetCharacter
 import com.example.shudomain.exercise.model.AlphabetExercise
 import com.example.shudomain.exercise.model.ExerciseStreak
+import com.example.shudomain.practice.model.AlphabetCharacter
 import java.util.*
 
 object EntityConverter {
@@ -37,7 +37,8 @@ object EntityConverter {
             currentItem = this.currentItem,
             exercisesDone = this.exercisesDone,
             exercisesTodo = this.exercisesTodo,
-            completed = this.completed
+            completed = this.completed,
+            mastered = this.mastered,
         )
     }
 
@@ -47,7 +48,8 @@ object EntityConverter {
             exercisesDone = this.exercisesDone,
             exercisesTodo = this.exercisesTodo,
             practiceData = Date(),
-            completed = this.completed
+            completed = this.completed,
+            mastered = this.mastered,
         )
     }
 
@@ -56,7 +58,8 @@ object EntityConverter {
             currentItem = this.currentItem,
             exercisesDone = this.exercisesDone,
             exercisesTodo = this.exercisesTodo,
-            completed = this.completed
+            completed = this.completed,
+            mastered = this.mastered,
         )
     }
 
@@ -66,7 +69,8 @@ object EntityConverter {
             exercisesDone = this.exercisesDone,
             exercisesTodo = this.exercisesTodo,
             practiceData = Date(),
-            completed = this.completed
+            completed = this.completed,
+            mastered = this.mastered,
         )
     }
 

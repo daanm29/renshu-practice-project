@@ -37,6 +37,20 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_fragment_practice_to_fragment_list_add"
+            app:destination="@id/fragment_list_add"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_fragment_practice_to_fragment_list_overview"
+            app:destination="@id/fragment_list_overview"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/fragment_settings"
@@ -97,5 +111,20 @@
             android:name="alphabet"
             android:defaultValue=""
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_list_add"
+        android:name="com.example.renshu.practice.list.add.ListAddFragment"
+        android:label="ListAddFragment"
+        tools:layout="@layout/fragment_add_list">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_list_overview"
+        android:name="com.example.renshu.practice.list.ListOverviewFragment"
+        android:label="ListOverview"
+        tools:layout="@layout/fragment_overview_list">
+
     </fragment>
 </navigation>

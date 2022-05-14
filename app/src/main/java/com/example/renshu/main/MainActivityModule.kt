@@ -5,6 +5,8 @@ import com.example.renshu.home.HomeFragmentModule
 import com.example.renshu.practice.PracticeFragmentModule
 import com.example.renshu.practice.alphabet.AlphabetFragmentModule
 import com.example.renshu.practice.exercise.KanaExerciseFragmentModule
+import com.example.renshu.practice.list.add.ListAddFragmentModule
+import com.example.renshu.practice.list.ListOverviewFragmentModule
 import com.example.renshu.settings.SettingsFragmentModule
 import com.example.renshu.settings.info.AppInfoFragmentModule
 import dagger.Binds
@@ -23,6 +25,8 @@ interface MainActivityModule {
             AppInfoFragmentModule::class,
             AlphabetFragmentModule::class,
             KanaExerciseFragmentModule::class,
+            ListAddFragmentModule::class,
+            ListOverviewFragmentModule::class,
         ]
     )
     fun bindMainActivity(): MainActivity

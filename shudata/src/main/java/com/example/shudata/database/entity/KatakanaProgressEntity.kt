@@ -19,4 +19,5 @@ data class KatakanaProgressEntity(
     @ColumnInfo(name = "todo") val exercisesTodo: ArrayList<AlphabetExerciseCharacter>,
     @ColumnInfo(name = "date") val practiceData: Date,
     @ColumnInfo(name = "completed") val completed: Boolean,
+    @ColumnInfo(name = "mastered") val mastered: Int,
 )

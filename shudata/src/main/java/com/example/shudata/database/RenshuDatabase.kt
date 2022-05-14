@@ -19,7 +19,7 @@ import com.example.shudata.database.entity.*
         KatakanaProgressEntity::class,
         StreakEntity::class,
     ],
-    version = 2,
+    version = 3,
     exportSchema = false,
 )
 abstract class RenshuDatabase : RoomDatabase() {

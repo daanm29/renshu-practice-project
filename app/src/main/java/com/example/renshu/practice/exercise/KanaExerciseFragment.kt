@@ -1,7 +1,6 @@
 package com.example.renshu.practice.exercise
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -43,7 +42,9 @@ class KanaExerciseFragment : DaggerFragment(R.layout.fragment_kana_exercise) {
 
     private fun handleNavigationAction(action: ExerciseNavigationAction) {
         when (action) {
-            ExerciseNavigationAction.OpenPractice -> { findNavController().popBackStack() }
+            ExerciseNavigationAction.OpenPractice -> {
+                findNavController().popBackStack()
+            }
         }
     }
 
@@ -67,6 +68,11 @@ class KanaExerciseFragment : DaggerFragment(R.layout.fragment_kana_exercise) {
             ui.firstChoice.text = currentExercise.exerciseAnswers[0]
             ui.firstChoice.setOnClickListener {
                 if (ui.firstChoice.text == currentExercise.correctAnswer) {
+                    if (alphabetExercise.exercisesTodo.size == 1) {
+                        alphabetExercise.completed = true
+                        viewModel.openPracticeFragment(alphabetExercise)
+                    }
+
                     alphabetExercise.exercisesDone.add(currentExercise)
                     alphabetExercise.exercisesTodo.remove(currentExercise)
                 } else {
@@ -80,6 +86,10 @@ class KanaExerciseFragment : DaggerFragment(R.layout.fragment_kana_exercise) {
             ui.secondChoice.text = currentExercise.exerciseAnswers[1]
             ui.secondChoice.setOnClickListener {
                 if (ui.secondChoice.text == currentExercise.correctAnswer) {
+                    if (alphabetExercise.exercisesTodo.size == 1) {
+                        alphabetExercise.completed = true
+                        viewModel.openPracticeFragment(alphabetExercise)
+                    }
                     alphabetExercise.exercisesDone.add(currentExercise)
                     alphabetExercise.exercisesTodo.remove(currentExercise)
                 } else {
@@ -93,6 +103,10 @@ class KanaExerciseFragment : DaggerFragment(R.layout.fragment_kana_exercise) {
             ui.thirdChoice.text = currentExercise.exerciseAnswers[2]
             ui.thirdChoice.setOnClickListener {
                 if (ui.thirdChoice.text == currentExercise.correctAnswer) {
+                    if (alphabetExercise.exercisesTodo.size == 1) {
+                        alphabetExercise.completed = true
+                        viewModel.openPracticeFragment(alphabetExercise)
+                    }
                     alphabetExercise.exercisesDone.add(currentExercise)
                     alphabetExercise.exercisesTodo.remove(currentExercise)
                 } else {
@@ -102,9 +116,6 @@ class KanaExerciseFragment : DaggerFragment(R.layout.fragment_kana_exercise) {
 
                 initData(alphabetExercise)
             }
-        } else {
-            alphabetExercise.completed = true
-            viewModel.openPracticeFragment(alphabetExercise)
         }
     }
 
