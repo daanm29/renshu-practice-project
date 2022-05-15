@@ -12,17 +12,12 @@ import com.example.renshu.R
 import com.example.renshu.databinding.FragmentHomeBinding
 import com.example.renshu.generic.CalendarDayExtension.toCalendarDay
 import com.example.shudomain.exercise.model.AlphabetExercise
-import com.example.shudomain.exercise.model.AlphabetExerciseCharacter
 import com.example.shudomain.exercise.model.ExerciseStreak
 import com.example.shupresentation.generic.mvvm.UIState
 import com.example.shupresentation.home.HomeNavigationAction
 import com.example.shupresentation.home.HomeViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import dagger.android.support.DaggerFragment
-import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toJavaLocalDateTime
-import kotlinx.datetime.toLocalDateTime
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -49,9 +44,13 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
     private fun setCurrentMonth() {
         val simpleDateFormat = SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.getDefault())
         val installDate = simpleDateFormat.parse(sharedPreferences.getString("install_date", "").toString())
-            ?: simpleDateFormat.parse(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).toJavaLocalDateTime().toString())
 
-        val calendarDay = CalendarDay.from(installDate.year + 1900, installDate.month + 1, installDate.day)
+        val today = Date()
+        var calendarDay = CalendarDay.from(today.year + 1900, today.month + 1, today.date)
+
+        if (installDate != null) {
+            calendarDay = CalendarDay.from(installDate.year + 1900, installDate.month + 1, installDate.date)
+        }
 
         ui.calendarView.state().edit()
             .setMinimumDate(calendarDay)

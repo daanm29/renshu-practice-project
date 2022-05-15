@@ -71,7 +71,7 @@ object EntityConverter {
             currentItem = this.currentItem,
             exercisesDone = this.exercisesDone,
             exercisesTodo = this.exercisesTodo,
-            practiceData = Date(),
+            practiceData = Date(System.currentTimeMillis()),
             completed = this.completed,
             mastered = this.mastered,
         )
