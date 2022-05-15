@@ -6,6 +6,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
+import com.example.shudata.database.dao.CustomListDao
 import com.example.shudata.database.dao.HiraganaDao
 import com.example.shudata.database.dao.KatakanaDao
 import com.example.shudata.database.dao.StreakDao
@@ -18,8 +19,9 @@ import com.example.shudata.database.entity.*
         KatakanaEntity::class,
         KatakanaProgressEntity::class,
         StreakEntity::class,
+        CustomListEntity::class,
     ],
-    version = 3,
+    version = 4,
     exportSchema = false,
 )
 abstract class RenshuDatabase : RoomDatabase() {
@@ -29,6 +31,8 @@ abstract class RenshuDatabase : RoomDatabase() {
     abstract fun katakanaDao(): KatakanaDao
 
     abstract fun streakDao(): StreakDao
+
+    abstract fun customListDao(): CustomListDao
 
     companion object {
 

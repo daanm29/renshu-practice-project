@@ -24,6 +24,6 @@ interface PracticeFragmentModule {
         @Binds
         @IntoMap
         @ViewModelKey(PracticeViewModel::class)
-        fun bindViewModel(practiceViewModel: PracticeViewModel) : ViewModel
+        fun bindViewModel(practiceViewModel: PracticeViewModel): ViewModel
     }
 }

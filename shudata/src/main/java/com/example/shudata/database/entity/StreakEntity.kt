@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.shudata.database.DateConverter
+import com.example.shudata.database.converter.DateConverter
 import java.util.*
 
 @Entity(tableName = "streak")

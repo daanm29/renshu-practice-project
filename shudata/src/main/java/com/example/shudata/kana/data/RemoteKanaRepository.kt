@@ -1,21 +1,21 @@
 package com.example.shudata.kana.data
 
-import com.example.shudata.database.EntityConverter.toAlphabetCharacter
-import com.example.shudata.database.EntityConverter.toHiraganaEntity
-import com.example.shudata.database.EntityConverter.toKatakanaEntity
+import com.example.shudata.database.converter.EntityConverter.toAlphabetCharacter
+import com.example.shudata.database.converter.EntityConverter.toHiraganaEntity
+import com.example.shudata.database.converter.EntityConverter.toKatakanaEntity
 import com.example.shudata.database.dao.HiraganaDao
 import com.example.shudata.database.dao.KatakanaDao
 import com.example.shudata.kana.mapper.AlphabetResponseMapper.toAlphabetPortions
 import com.example.shudomain.practice.model.AlphabetCharacter
-import com.example.shudomain.practice.repository.GetKanaRepository
+import com.example.shudomain.practice.repository.KanaRepository
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
-class RemoteGetKanaRepository @Inject constructor(
+class RemoteKanaRepository @Inject constructor(
     private val kanaService: KanaService,
     private val hiraganaDao: HiraganaDao,
     private val katakanaDao: KatakanaDao,
-) : GetKanaRepository {
+) : KanaRepository {
 
     override fun getAllHiragana(): Single<List<AlphabetCharacter>> {
         val alphabetHiragana = hiraganaDao.getHiragana()

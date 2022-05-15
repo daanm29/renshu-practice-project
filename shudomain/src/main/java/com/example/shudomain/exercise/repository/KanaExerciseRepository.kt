@@ -4,7 +4,7 @@ import com.example.shudomain.exercise.model.AlphabetExercise
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
-interface GetKanaExercisesRepository {
+interface KanaExerciseRepository {
 
     fun getAllHiraganaExercises(): Single<AlphabetExercise>
 

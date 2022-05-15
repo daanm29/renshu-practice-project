@@ -5,7 +5,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/listCardView"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         app:cardCornerRadius="20dp"
@@ -37,22 +37,10 @@
                 android:layout_marginVertical="12dp"
                 android:maxLength="100"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/deleteListIcon"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/listTitle"
                 tools:text="Describe the list in less than eight words. Test words I am writing test words" />
-
-            <ImageView
-                android:id="@+id/deleteListIcon"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginHorizontal="12dp"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_delete"
-                app:layout_constraintBottom_toBottomOf="@+id/listSubtitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/listSubtitle"
-                app:tint="@color/red" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

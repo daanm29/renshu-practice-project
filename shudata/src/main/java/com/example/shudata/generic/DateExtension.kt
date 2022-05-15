@@ -1,4 +1,4 @@
-package com.example.shudata.kana
+package com.example.shudata.generic
 
 import java.util.*
 

@@ -117,7 +117,13 @@
         android:name="com.example.renshu.practice.list.add.ListAddFragment"
         android:label="ListAddFragment"
         tools:layout="@layout/fragment_add_list">
-
+        <action
+            android:id="@+id/action_listAddFragment_toPracticeFragment"
+            app:destination="@id/fragment_practice"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment

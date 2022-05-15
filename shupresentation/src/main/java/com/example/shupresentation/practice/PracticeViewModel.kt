@@ -3,7 +3,8 @@ package com.example.shupresentation.practice
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.shudomain.list.CustomList
+import com.example.shudomain.list.GetCustomLists
+import com.example.shudomain.list.model.CustomList
 import com.example.shudomain.practice.GetAllHiragana
 import com.example.shudomain.practice.GetAllKatakana
 import com.example.shudomain.practice.model.AlphabetCharacter
@@ -21,8 +22,7 @@ import javax.inject.Inject
 class PracticeViewModel @Inject constructor(
     private val getAllHiragana: GetAllHiragana,
     private val getAllKatakana: GetAllKatakana,
-    //private val deleteCustomList: DeleteCustomList,
-    //private val getCustomLists: GetCustomLists,
+    private val getCustomLists: GetCustomLists,
 ) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
@@ -51,6 +51,8 @@ class PracticeViewModel @Inject constructor(
 
     private fun getHiragana() {
         getAllHiragana()
+            .subscribeOnIO()
+            .observeOnMain()
             .postUIStateTo(_uiState)
             .subscribe({
                 _hiragana.postValue(it)
@@ -61,16 +63,23 @@ class PracticeViewModel @Inject constructor(
 
     private fun getKatakana() {
         getAllKatakana()
+            .subscribeOnIO()
+            .observeOnMain()
             .postUIStateTo(_uiState)
             .subscribe({
                 _katakana.postValue(it)
-                getCustomLists()
+                getLists()
             }, Timber::e)
             .addTo(compositeDisposable)
     }
 
-    private fun getCustomLists() {
-
+    private fun getLists() {
+        getCustomLists()
+            .subscribeOnIO()
+            .observeOnMain()
+            .postUIStateTo(_uiState)
+            .subscribe(_customLists::postValue, Timber::e)
+            .addTo(compositeDisposable)
     }
 
     fun openHiragana(character: String) {
@@ -95,10 +104,6 @@ class PracticeViewModel @Inject constructor(
 
     fun openWordList(listId: String) {
         _navigation.postValue(OpenList(listId))
-    }
-
-    fun deleteList(listId: String) {
-
     }
 
     override fun onCleared() {

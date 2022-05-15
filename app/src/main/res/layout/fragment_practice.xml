@@ -217,47 +217,50 @@
                             android:text="@string/practice_title_list"
                             android:textSize="22sp"
                             android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="@+id/wordListRecyclerView"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/wordListRecyclerView"
+                        <FrameLayout
+                            android:id="@+id/recyclerLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="12dp"
-                            android:layout_marginTop="14dp"
-                            android:layout_marginBottom="8dp"
-                            android:orientation="horizontal"
-                            android:overScrollMode="never"
+                            android:layout_marginTop="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/wordListTitle"
-                            tools:itemCount="2" />
+                            app:layout_constraintTop_toBottomOf="@+id/wordListTitle">
 
-                        <ProgressBar
-                            android:id="@+id/listLoadingBar"
-                            android:layout_width="match_parent"
-                            android:layout_height="150dp"
-                            android:indeterminateTint="@color/red"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toTopOf="@id/listAddButton"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/wordListTitle"
-                            tools:visibility="visible" />
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/wordListRecyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="12dp"
+                                android:orientation="horizontal"
+                                android:overScrollMode="never"
+                                tools:itemCount="2"
+                                tools:listitem="@layout/item_custom_list" />
+
+                            <ProgressBar
+                                android:id="@+id/listLoadingBar"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:layout_gravity="center"
+                                android:indeterminateTint="@color/red"
+                                android:visibility="gone"
+                                tools:visibility="visible" />
+                        </FrameLayout>
 
                         <Button
                             android:id="@+id/listAddButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="16dp"
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginVertical="8dp"
                             android:text="@string/practice_add_list_button"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/recyclerLayout" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>

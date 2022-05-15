@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.renshu.databinding.ItemCustomListBinding
-import com.example.shudomain.list.CustomList
+import com.example.shudomain.list.model.CustomList
 
-class CustomListAdapter(
+class CustomListItemAdapter(
     private val onClick: (String) -> Unit,
-    private val onDelete: (String) -> Unit,
 ) : ListAdapter<CustomList, RecyclerView.ViewHolder>(itemDiff){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -28,7 +27,6 @@ class CustomListAdapter(
         fun bindData(customList: CustomList) {
             ui.listTitle.text = customList.title
             ui.listSubtitle.text = customList.description
-            ui.deleteListIcon.setOnClickListener { onDelete(customList.title) }
             ui.listCardView.setOnClickListener { onClick(customList.title) }
         }
     }

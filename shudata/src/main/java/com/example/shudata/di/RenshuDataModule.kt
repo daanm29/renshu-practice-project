@@ -3,17 +3,16 @@ package com.example.shudata.di
 import android.content.Context
 import com.example.shudata.BuildConfig
 import com.example.shudata.database.RenshuDatabase
+import com.example.shudata.database.dao.CustomListDao
 import com.example.shudata.database.dao.HiraganaDao
 import com.example.shudata.database.dao.KatakanaDao
 import com.example.shudata.database.dao.StreakDao
 import com.example.shudata.di.RenshuDataModule.Bindings
-import com.example.shudata.kana.data.KanaService
-import com.example.shudata.kana.data.RemoteGetKanaExercisesRepository
-import com.example.shudata.kana.data.RemoteGetKanaRepository
-import com.example.shudata.kana.data.RemoteGetStreakRepository
-import com.example.shudomain.exercise.repository.GetKanaExercisesRepository
-import com.example.shudomain.exercise.repository.GetStreakRepository
-import com.example.shudomain.practice.repository.GetKanaRepository
+import com.example.shudata.kana.data.*
+import com.example.shudomain.exercise.repository.KanaExerciseRepository
+import com.example.shudomain.exercise.repository.StreakRepository
+import com.example.shudomain.list.repository.CustomListRepository
+import com.example.shudomain.practice.repository.KanaRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Binds
@@ -72,17 +71,23 @@ class RenshuDataModule {
     @Provides
     fun provideStreakDao(database: RenshuDatabase): StreakDao = database.streakDao()
 
+    @Provides
+    fun provideCustomListDao(database: RenshuDatabase): CustomListDao = database.customListDao()
+
     @Module
     interface Bindings {
 
         @Binds
-        fun bindKanaRepository(repository: RemoteGetKanaRepository): GetKanaRepository
+        fun bindKanaRepository(repository: RemoteKanaRepository): KanaRepository
 
         @Binds
-        fun bindKanaExerciseRepository(repository: RemoteGetKanaExercisesRepository): GetKanaExercisesRepository
+        fun bindKanaExerciseRepository(repository: RemoteKanaExerciseRepository): KanaExerciseRepository
 
         @Binds
-        fun bindStreakRepository(repository: RemoteGetStreakRepository): GetStreakRepository
+        fun bindStreakRepository(repository: RemoteStreakRepository): StreakRepository
+
+        @Binds
+        fun bindCustomListRepository(repository: RemoteCustomListRepository): CustomListRepository
 
     }
 }

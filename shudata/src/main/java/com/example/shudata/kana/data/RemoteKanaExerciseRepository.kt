@@ -1,27 +1,27 @@
 package com.example.shudata.kana.data
 
-import com.example.shudata.database.EntityConverter.toAlphabetExercise
-import com.example.shudata.database.EntityConverter.toHiraganaProgressEntity
-import com.example.shudata.database.EntityConverter.toKatakanaProgressEntity
+import com.example.shudata.database.converter.EntityConverter.toAlphabetExercise
+import com.example.shudata.database.converter.EntityConverter.toHiraganaProgressEntity
+import com.example.shudata.database.converter.EntityConverter.toKatakanaProgressEntity
 import com.example.shudata.database.dao.HiraganaDao
 import com.example.shudata.database.dao.KatakanaDao
 import com.example.shudata.database.dao.StreakDao
 import com.example.shudata.database.entity.StreakEntity
-import com.example.shudata.kana.DateExtension.isDateEqual
-import com.example.shudata.kana.DateExtension.isOtherDateYesterday
+import com.example.shudata.generic.DateExtension.isDateEqual
+import com.example.shudata.generic.DateExtension.isOtherDateYesterday
 import com.example.shudomain.exercise.model.AlphabetExercise
 import com.example.shudomain.exercise.model.AlphabetExerciseCharacter
-import com.example.shudomain.exercise.repository.GetKanaExercisesRepository
+import com.example.shudomain.exercise.repository.KanaExerciseRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import java.util.*
 import javax.inject.Inject
 
-class RemoteGetKanaExercisesRepository @Inject constructor(
+class RemoteKanaExerciseRepository @Inject constructor(
     private val hiraganaDao: HiraganaDao,
     private val katakanaDao: KatakanaDao,
     private val streakDao: StreakDao,
-) : GetKanaExercisesRepository {
+) : KanaExerciseRepository {
 
     override fun getAllHiraganaExercises(): Single<AlphabetExercise> {
         val hiraganaExercises = hiraganaDao.getHiraganaProgress()

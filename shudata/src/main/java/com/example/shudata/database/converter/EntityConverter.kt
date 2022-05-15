@@ -1,10 +1,13 @@
-package com.example.shudata.database
+package com.example.shudata.database.converter
 
 import com.example.shudata.database.entity.*
 import com.example.shudomain.exercise.model.AlphabetExercise
 import com.example.shudomain.exercise.model.ExerciseStreak
+import com.example.shudomain.list.model.CustomList
+import com.example.shudomain.list.model.CustomListWord
 import com.example.shudomain.practice.model.AlphabetCharacter
 import java.util.*
+import kotlin.collections.ArrayList
 
 object EntityConverter {
 
@@ -87,6 +90,22 @@ object EntityConverter {
             startDate = this.startDate,
             currentDate = this.currentDate,
             streakLength = this.streakLength
+        )
+    }
+
+    internal fun CustomListEntity.toCustomList(): CustomList {
+        return CustomList(
+            title = this.titleList,
+            description = this.descriptionList,
+            characters = this.customWords as ArrayList<CustomListWord>
+        )
+    }
+
+    internal fun CustomList.toCustomListEntity(): CustomListEntity {
+        return CustomListEntity(
+            titleList = this.title,
+            descriptionList = this.description,
+            customWords = this.characters
         )
     }
 }

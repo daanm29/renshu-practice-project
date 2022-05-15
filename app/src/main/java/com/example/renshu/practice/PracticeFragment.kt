@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.renshu.R
 import com.example.renshu.databinding.FragmentPracticeBinding
-import com.example.renshu.practice.adapter.CustomListAdapter
+import com.example.renshu.practice.adapter.CustomListItemAdapter
 import com.example.renshu.practice.adapter.SinglePracticeItemAdapter
+import com.example.shudomain.list.model.CustomList
 import com.example.shudomain.practice.model.AlphabetCharacter
 import com.example.shupresentation.generic.mvvm.UIState
 import com.example.shupresentation.practice.PracticeNavigationAction
@@ -27,9 +28,9 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
     private val viewModel by viewModels<PracticeViewModel> { viewModelFactory }
     private val ui by viewBinding<FragmentPracticeBinding>()
 
-    private var hiraganaItemAdapter = SinglePracticeItemAdapter { character -> viewModel.openHiragana(character) }
-    private var katakanaItemAdapter = SinglePracticeItemAdapter { character -> viewModel.openKatakana(character) }
-    //private var customListAdapter = CustomListAdapter(viewModel::openWordList) { viewModel.deleteList(it) }
+    private val hiraganaItemAdapter = SinglePracticeItemAdapter { character -> viewModel.openHiragana(character) }
+    private val katakanaItemAdapter = SinglePracticeItemAdapter { character -> viewModel.openKatakana(character) }
+    private val customListAdapter = CustomListItemAdapter { viewModel.openWordList(it) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,15 +44,16 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
         viewModel.uiState.observe(viewLifecycleOwner, ::handleUIState)
         viewModel.hiragana.observe(viewLifecycleOwner, ::hiraganaRecyclerView)
         viewModel.katakana.observe(viewLifecycleOwner, ::katakanaRecyclerView)
+        viewModel.customLists.observe(viewLifecycleOwner, ::customListRecyclerView)
     }
 
     private fun handleNavigationAction(action: PracticeNavigationAction) {
         when (action) {
             is PracticeNavigationAction.OpenHiragana -> openHiraganaCharacter(action.character)
             is PracticeNavigationAction.OpenKatakana -> openKatakanaCharacter(action.character)
-            is PracticeNavigationAction.OpenList -> {}
             is PracticeNavigationAction.OpenHiraganaPractice -> openKanaExercise(action.alphabet)
             is PracticeNavigationAction.OpenKatakanaPractice -> openKanaExercise(action.alphabet)
+            is PracticeNavigationAction.OpenList -> {}
             PracticeNavigationAction.OpenAddList -> openAddList()
         }
     }
@@ -120,6 +122,16 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
         }
 
         katakanaItemAdapter.submitList(characters)
+    }
+
+    private fun customListRecyclerView(customLists: List<CustomList>) {
+        ui.wordListRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = customListAdapter
+            LinearSnapHelper().attachToRecyclerView(this)
+        }
+
+        customListAdapter.submitList(customLists)
     }
 
     private fun initButtons() {

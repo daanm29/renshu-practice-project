@@ -1,4 +1,4 @@
-package com.example.shudata.database
+package com.example.shudata.database.converter
 
 import androidx.room.TypeConverter
 import com.example.shudomain.exercise.model.AlphabetExerciseCharacter
