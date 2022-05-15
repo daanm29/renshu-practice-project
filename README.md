@@ -6,6 +6,8 @@ Renshu is an application where you can practice Japanese words and verbs from th
 <div style="display:flex" align="center">
   <img width="20%" src="https://github.com/daanm29/renshu-practice-project/blob/develop/app_pictures/renshu_home.jpg">
   <img width="20%" src="https://github.com/daanm29/renshu-practice-project/blob/develop/app_pictures/renshu_practice.jpg">
+  <img width="20%" src="https://github.com/daanm29/renshu-practice-project/blob/develop/app_pictures/renshu_exercise.jpg">
+  <img width="20%" src="https://github.com/daanm29/renshu-practice-project/blob/develop/app_pictures/renshu_kana_info.jpg">
   <img width="20%" src="https://github.com/daanm29/renshu-practice-project/blob/develop/app_pictures/renshu_settings.jpg">
 </div>
 
