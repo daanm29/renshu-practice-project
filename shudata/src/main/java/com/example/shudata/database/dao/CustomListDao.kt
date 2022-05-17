@@ -12,6 +12,9 @@ abstract class CustomListDao {
     @Query("SELECT * FROM custom_lists")
     abstract fun getCustomLists(): List<CustomListEntity>
 
+    @Query("SELECT * from custom_lists WHERE list_title = :title")
+    abstract fun getCustomList(title: String): CustomListEntity
+
     @Insert(onConflict = REPLACE)
     abstract fun insertCustomList(customList: CustomListEntity)
 

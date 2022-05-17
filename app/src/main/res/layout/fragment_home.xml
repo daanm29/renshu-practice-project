@@ -24,7 +24,7 @@
                     android:layout_height="104dp"
                     android:contentDescription="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/image_japanese_emperor_flag"
+                    android:src="@drawable/toolbar_background"
                     app:layout_collapseMode="parallax" />
 
                 <androidx.appcompat.widget.Toolbar

@@ -2,9 +2,12 @@ package com.example.renshu.practice
 
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -53,7 +56,7 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
             is PracticeNavigationAction.OpenKatakana -> openKatakanaCharacter(action.character)
             is PracticeNavigationAction.OpenHiraganaPractice -> openKanaExercise(action.alphabet)
             is PracticeNavigationAction.OpenKatakanaPractice -> openKanaExercise(action.alphabet)
-            is PracticeNavigationAction.OpenList -> {}
+            is PracticeNavigationAction.OpenList -> openCustomList(action.listId)
             PracticeNavigationAction.OpenAddList -> openAddList()
         }
     }
@@ -81,6 +84,14 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
                 .actionPracticeFragmentToAlphabetFragment()
                 .setCharacter(character)
                 .setAlphabet(getString(R.string.alphabet_katakana))
+        )
+    }
+
+    private fun openCustomList(title: String) {
+        findNavController().navigate(
+            PracticeFragmentDirections
+                .actionFragmentPracticeToFragmentListOverview()
+                .setTitle(title)
         )
     }
 
@@ -126,7 +137,7 @@ class PracticeFragment : DaggerFragment(R.layout.fragment_practice) {
 
     private fun customListRecyclerView(customLists: List<CustomList>) {
         ui.wordListRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = customListAdapter
             LinearSnapHelper().attachToRecyclerView(this)
         }

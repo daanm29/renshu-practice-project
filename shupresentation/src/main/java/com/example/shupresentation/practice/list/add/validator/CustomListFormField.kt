@@ -1,4 +1,4 @@
-package com.example.shupresentation.practice.list.validator
+package com.example.shupresentation.practice.list.add.validator
 
 enum class CustomListFormField {
 

@@ -1,11 +1,9 @@
 package com.example.renshu.practice.alphabet
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginBottom
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -102,7 +100,8 @@ class AlphabetFragment : DaggerFragment(R.layout.fragment_alphabet) {
         ui.exampleRecyclerView.apply {
             adapter = exampleItemAdapter
             addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL).apply {
-                ContextCompat.getDrawable(requireContext(), R.drawable.divider_recycler_view)?.let { setDrawable(it) } })
+                ContextCompat.getDrawable(requireContext(), R.drawable.divider_recycler_view)?.let { setDrawable(it) }
+            })
         }
 
         val character = characters.find { it.japaneseCharacter == args.character }

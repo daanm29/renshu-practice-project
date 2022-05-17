@@ -131,6 +131,16 @@
         android:name="com.example.renshu.practice.list.ListOverviewFragment"
         android:label="ListOverview"
         tools:layout="@layout/fragment_overview_list">
-
+        <argument
+            android:name="title"
+            android:defaultValue=""
+            app:argType="string" />
+        <action
+            android:id="@+id/action_listOverviewFragment_toPracticeFragment"
+            app:destination="@id/fragment_practice"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 </navigation>

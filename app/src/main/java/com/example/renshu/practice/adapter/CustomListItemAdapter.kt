@@ -10,7 +10,7 @@ import com.example.shudomain.list.model.CustomList
 
 class CustomListItemAdapter(
     private val onClick: (String) -> Unit,
-) : ListAdapter<CustomList, RecyclerView.ViewHolder>(itemDiff){
+) : ListAdapter<CustomList, RecyclerView.ViewHolder>(itemDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CustomListItemViewHolder(
@@ -33,7 +33,7 @@ class CustomListItemAdapter(
 
     companion object {
 
-        private val itemDiff = object: DiffUtil.ItemCallback<CustomList>() {
+        private val itemDiff = object : DiffUtil.ItemCallback<CustomList>() {
             override fun areItemsTheSame(oldItem: CustomList, newItem: CustomList): Boolean {
                 return oldItem.title == newItem.title
             }

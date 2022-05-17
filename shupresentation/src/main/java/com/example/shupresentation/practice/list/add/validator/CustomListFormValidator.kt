@@ -1,9 +1,9 @@
-package com.example.shupresentation.practice.list.validator
+package com.example.shupresentation.practice.list.add.validator
 
 import com.example.shudomain.list.validation.ValidateDescription
 import com.example.shudomain.list.validation.ValidateTitle
-import com.example.shupresentation.practice.list.validator.CustomListFormField.DESCRIPTION
-import com.example.shupresentation.practice.list.validator.CustomListFormField.TITLE
+import com.example.shupresentation.practice.list.add.validator.CustomListFormField.DESCRIPTION
+import com.example.shupresentation.practice.list.add.validator.CustomListFormField.TITLE
 import javax.inject.Inject
 
 class CustomListFormValidator @Inject constructor(

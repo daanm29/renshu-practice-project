@@ -14,8 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Renshu">
         <activity
-            android:name=".main.MainActivity"
+            android:name=".splash.SplashActivity"
             android:exported="true"
+            android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -23,6 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".main.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:exported="true"

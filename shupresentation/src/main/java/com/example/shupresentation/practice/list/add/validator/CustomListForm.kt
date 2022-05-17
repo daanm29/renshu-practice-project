@@ -1,4 +1,4 @@
-package com.example.shupresentation.practice.list.validator
+package com.example.shupresentation.practice.list.add.validator
 
 data class CustomListForm(
     val title: String,

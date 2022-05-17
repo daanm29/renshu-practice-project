@@ -15,11 +15,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.renshu.R
 import com.example.renshu.databinding.FragmentAddListBinding
 import com.example.shudomain.list.model.CustomListWord
-import com.example.shupresentation.practice.list.CustomListNavigationAction
-import com.example.shupresentation.practice.list.CustomListViewModel
-import com.example.shupresentation.practice.list.validator.CustomListForm
-import com.example.shupresentation.practice.list.validator.CustomListFormField
-import com.example.shupresentation.practice.list.validator.CustomListFormField.*
+import com.example.shupresentation.practice.list.add.ListAddNavigationAction
+import com.example.shupresentation.practice.list.add.ListAddViewModel
+import com.example.shupresentation.practice.list.add.validator.CustomListForm
+import com.example.shupresentation.practice.list.add.validator.CustomListFormField
+import com.example.shupresentation.practice.list.add.validator.CustomListFormField.*
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerFragment
@@ -30,7 +30,7 @@ class ListAddFragment : DaggerFragment(R.layout.fragment_add_list) {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel by viewModels<CustomListViewModel> { viewModelFactory }
+    private val viewModel by viewModels<ListAddViewModel> { viewModelFactory }
     private val ui by viewBinding<FragmentAddListBinding>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,13 +42,13 @@ class ListAddFragment : DaggerFragment(R.layout.fragment_add_list) {
     }
 
     private fun observeViewModel() {
-        viewModel.navigation.observe(viewLifecycleOwner, ::handleNavigation)
+        viewModel.addNavigation.observe(viewLifecycleOwner, ::handleNavigation)
         viewModel.invalidFields.observe(viewLifecycleOwner, ::handleInvalidFields)
     }
 
-    private fun handleNavigation(action: CustomListNavigationAction) {
-        when (action) {
-            CustomListNavigationAction.OpenPractice ->
+    private fun handleNavigation(actionAdd: ListAddNavigationAction) {
+        when (actionAdd) {
+            ListAddNavigationAction.OpenPractice ->
                 findNavController().navigate(ListAddFragmentDirections.actionListAddFragmentToPracticeFragment())
         }
     }

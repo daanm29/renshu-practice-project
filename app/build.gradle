@@ -74,7 +74,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
     // Google Material
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.6.0'
 
     // ViewBinding
     implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.6'

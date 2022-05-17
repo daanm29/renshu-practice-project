@@ -25,6 +25,12 @@ class RemoteCustomListRepository @Inject constructor(
         }
     }
 
+    override fun getCustomList(title: String): Single<CustomList> {
+        return Single.create { emitter ->
+            emitter.onSuccess(customListDao.getCustomList(title).toCustomList())
+        }
+    }
+
     override fun saveCustomList(customList: CustomList): Completable {
         return Completable.create { emitter ->
             customListDao.insertCustomList(customList.toCustomListEntity())

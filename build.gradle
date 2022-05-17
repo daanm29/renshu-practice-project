@@ -9,7 +9,7 @@ buildscript {
         timber_version = "5.0.1"
 
         // Project
-        project_name_version = "0.0.1"
+        project_name_version = "1.0.0"
         project_code_version = 1
 
         // Dagger

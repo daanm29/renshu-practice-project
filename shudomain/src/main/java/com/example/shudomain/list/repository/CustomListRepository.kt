@@ -8,6 +8,8 @@ interface CustomListRepository {
 
     fun getCustomLists(): Single<List<CustomList>>
 
+    fun getCustomList(title: String): Single<CustomList>
+
     fun saveCustomList(customList: CustomList) : Completable
 
     fun deleteCustomList(title: String): Completable

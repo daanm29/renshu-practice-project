@@ -2,7 +2,7 @@ package com.example.renshu.practice.list.add
 
 import androidx.lifecycle.ViewModel
 import com.example.renshu.mvvm.ViewModelKey
-import com.example.shupresentation.practice.list.CustomListViewModel
+import com.example.shupresentation.practice.list.add.ListAddViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -23,7 +23,7 @@ interface ListAddFragmentModule {
 
         @Binds
         @IntoMap
-        @ViewModelKey(CustomListViewModel::class)
-        fun bindViewModel(customListViewModel: CustomListViewModel): ViewModel
+        @ViewModelKey(ListAddViewModel::class)
+        fun bindViewModel(listAddViewModel: ListAddViewModel): ViewModel
     }
 }
